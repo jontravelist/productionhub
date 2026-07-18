@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Production Hub — The operating system for video production</title>
+  <meta name="description" content="One platform to run a video production studio end-to-end — sales, quotes, contracts, production, review, delivery and the back office. Replaces the ten disconnected tools agencies pay for." />
+  <meta name="theme-color" content="#0d1219" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Production Hub — The operating system for video production" />
+  <meta property="og:description" content="One platform to run a production studio end-to-end. Replace the disconnected tool stack — one login, one bill, one source of truth." />
+  <meta property="og:url" content="https://productionhub.co" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E" />
+  <style>
+  :root {
+    /* light theme (cool paper) */
+    --bg: #ecf0f4;
+    --surface: #ffffff;
+    --surface-2: #f2f5f9;
+    --border: #d8dfe8;
+    --text: #141a22;
+    --muted: #55606e;
+    --faint: #838d9b;
+    --accent: #1f5fd0;      /* signal blue, darkened for contrast on paper */
+    --accent-fill: #2f7be6;
+    --accent-soft: rgba(47,123,230,0.13);
+    --teal: #227d86;
+    --good: #2f9d6a;
+    --ruler: rgba(20,26,34,0.14);
+    --shadow: 0 1px 2px rgba(16,22,34,0.06), 0 10px 30px rgba(16,22,34,0.05);
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1219;
+      --surface: #151c26;
+      --surface-2: #1b2431;
+      --border: #283340;
+      --text: #e9eef4;
+      --muted: #9daabb;
+      --faint: #6b7887;
+      --accent: #57a0ff;
+      --accent-fill: #4790f2;
+      --accent-soft: rgba(87,160,255,0.16);
+      --teal: #46b0bd;
+      --good: #58c08a;
+      --ruler: rgba(233,238,244,0.16);
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 18px 40px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1219; --surface: #151c26; --surface-2: #1b2431; --border: #283340;
+    --text: #e9eef4; --muted: #9daabb; --faint: #6b7887;
+    --accent: #57a0ff; --accent-fill: #4790f2; --accent-soft: rgba(87,160,255,0.16);
+    --teal: #46b0bd; --good: #58c08a; --ruler: rgba(233,238,244,0.16);
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 18px 40px rgba(0,0,0,0.35);
+  }
+  :root[data-theme="light"] {
+    --bg: #ecf0f4; --surface: #ffffff; --surface-2: #f2f5f9; --border: #d8dfe8;
+    --text: #141a22; --muted: #55606e; --faint: #838d9b;
+    --accent: #1f5fd0; --accent-fill: #2f7be6; --accent-soft: rgba(47,123,230,0.13);
+    --teal: #227d86; --good: #2f9d6a; --ruler: rgba(20,26,34,0.14);
+    --shadow: 0 1px 2px rgba(16,22,34,0.06), 0 10px 30px rgba(16,22,34,0.05);
+  }
+
+  * { box-sizing: border-box; }
+  .os { background: var(--bg); color: var(--text); font-family: var(--sans);
+    line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .os :where(h1,h2,h3,p) { margin: 0; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow { font-family: var(--sans); font-size: 0.82rem; font-weight: 650; letter-spacing: 0;
+    text-transform: none; color: var(--accent); }
+
+  /* ---- top bar ---- */
+  .bar { display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0 0; }
+  .mark { display: flex; align-items: baseline; gap: 10px; }
+  .mark b { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+  .mark .dot { width: 9px; height: 9px; border-radius: 2px; background: var(--accent-fill);
+    display: inline-block; transform: translateY(-1px); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .mark small { font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0;
+    text-transform: none; color: var(--faint); }
+
+  /* ---- hero ---- */
+  .hero { padding: 70px 0 46px; }
+  .hero .eyebrow { font-size: clamp(1rem, 2.5vw, 1.45rem); font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.015em; margin-bottom: 10px; display: block; }
+  .hero h1 { font-size: clamp(2.35rem, 5.6vw, 3.9rem); font-weight: 800;
+    letter-spacing: -0.028em; line-height: 1.03; text-wrap: balance; max-width: 16ch; }
+  .hero h1 span { color: var(--accent); }
+  .hero .lede { margin-top: 22px; font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--muted);
+    max-width: 60ch; text-wrap: pretty; }
+  .metaline { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px 26px;
+    font-family: var(--sans); font-size: 0.82rem; letter-spacing: 0; color: var(--muted); }
+  .metaline b { color: var(--text); font-weight: 600; }
+
+  /* ---- replaces-the-stack ledger ---- */
+  .stack { padding: 8px 0 44px; }
+  .stack h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 790; letter-spacing: -0.024em;
+    margin-top: 8px; max-width: 22ch; text-wrap: balance; }
+  .ledger { margin-top: 24px; border: 1px solid var(--border); border-radius: 14px;
+    background: var(--surface); overflow: hidden; box-shadow: var(--shadow); }
+  .lrow { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline;
+    padding: 12px 18px; border-bottom: 1px solid var(--border); }
+  .lrow .cat { font-weight: 640; letter-spacing: -0.01em; }
+  .lrow .tool { color: var(--faint); font-size: 0.8rem; margin-left: 9px; }
+  .lrow .amt { font-family: var(--mono); font-size: 0.85rem; color: var(--muted);
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .lrow.sub { background: var(--surface-2); }
+  .lrow.sub .cat { font-weight: 700; }
+  .lrow.sub .amt { color: var(--text); font-weight: 700; }
+  .lrow.repl { background: var(--accent-soft); border-bottom: none; }
+  .lrow.repl .cat { color: var(--accent); font-weight: 750; }
+  .lrow.repl .amt { color: var(--accent); font-weight: 750; }
+  .stack .cap { margin-top: 13px; font-size: 0.78rem; color: var(--faint); max-width: 66ch; line-height: 1.5; }
+
+  /* ---- connected-system diagram ---- */
+  .netband { padding: 30px 0 12px; }
+  .netband h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 790; letter-spacing: -0.024em;
+    margin-top: 8px; max-width: 24ch; text-wrap: balance; }
+  .netcap { margin-top: 4px; font-size: 0.82rem; color: var(--muted); max-width: 64ch; line-height: 1.55; }
+  .net { display: block; width: 100%; height: auto; max-width: 760px; margin: 14px auto 6px; overflow: visible; }
+  .net .ring { fill: none; stroke: var(--border); stroke-width: 1; opacity: 0.7; }
+  .net .spoke { stroke: var(--border); stroke-width: 1.3; }
+  .net .flow { stroke: var(--accent); stroke-width: 2; stroke-linecap: round;
+    stroke-dasharray: 3 100; opacity: 0.8; animation: hubflow 3s linear infinite; }
+  .net .node { fill: var(--surface); stroke: var(--accent); stroke-width: 1.6; }
+  .net .node-dot { fill: var(--accent-fill); }
+  .net .core { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
+  .net .core-t { fill: var(--accent); font-family: var(--sans); font-weight: 750; font-size: 12.5px;
+    letter-spacing: 0; text-anchor: middle; }
+  .net .lab { fill: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 550;
+    letter-spacing: 0; }
+  @keyframes hubflow { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .net .flow { animation: none; opacity: 0.4; } }
+
+  /* --- site chrome: nav, buttons, CTA band --- */
+  html { scroll-behavior: smooth; scroll-padding-top: 78px; }
+  body { background: var(--bg); }
+  .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(140%) blur(10px); -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--border); }
+  .nav-in { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .nav .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+  .nav .brand .dot { width: 11px; height: 11px; border-radius: 3px; background: var(--accent-fill); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .nav .brand b { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; }
+  .btn { display: inline-block; background: var(--accent-fill); color: #fff; font-size: 0.95rem; font-weight: 650;
+    text-decoration: none; padding: 11px 20px; border-radius: 10px; border: 1px solid transparent; transition: filter .15s ease; }
+  .btn:hover { filter: brightness(1.08); }
+  .nav-cta { font-size: 0.88rem; font-weight: 650; text-decoration: none; color: #fff; background: var(--accent-fill); padding: 9px 16px; border-radius: 9px; }
+  .nav-cta:hover { filter: brightness(1.08); }
+  .hero-cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .cta-band { margin: 24px 0 8px; padding: 52px 40px; border-radius: 18px; border: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--surface), var(--surface-2)); text-align: center; }
+  .cta-band h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; text-wrap: balance; }
+  .cta-band p { margin: 12px auto 0; max-width: 52ch; color: var(--muted); font-size: 1.02rem; line-height: 1.6; }
+  .cta-band .btn { margin-top: 26px; font-size: 1.02rem; padding: 14px 28px; }
+  .foot a { color: var(--accent); text-decoration: none; }
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* ---- pipeline (timeline ruler) ---- */
+  .pipe { margin: 8px 0 8px; }
+  .pipe .track { position: relative; padding-top: 20px; }
+  .pipe .track::before { content: ""; position: absolute; top: 8px; left: 0; right: 0; height: 1px;
+    background: var(--ruler); }
+  .pipe .track::after { content: ""; position: absolute; top: 3px; left: 0; right: 0; height: 6px;
+    background-image: repeating-linear-gradient(90deg, var(--ruler) 0 1px, transparent 1px 40px); }
+  .stages { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; position: relative; }
+  .stage { display: flex; flex-direction: column; gap: 3px; }
+  .stage .n { font-family: var(--mono); font-size: 0.68rem; color: var(--accent);
+    letter-spacing: 0.05em; }
+  .stage .s { font-size: 0.82rem; font-weight: 650; letter-spacing: -0.01em; }
+
+  /* ---- phase sections ---- */
+  .phases { display: flex; flex-direction: column; gap: 30px; padding: 48px 0 8px; }
+  .phase { display: grid; grid-template-columns: 168px 1fr; gap: 26px; }
+  .phase-head { position: sticky; top: 16px; align-self: start; }
+  .phase-head .pn { font-family: var(--sans); font-size: 0.75rem; font-weight: 650; color: var(--accent);
+    letter-spacing: 0; }
+  .phase-head h2 { font-size: 1.35rem; font-weight: 750; letter-spacing: -0.02em; margin-top: 4px; }
+  .phase-head p { margin-top: 8px; font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .modules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .module { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 16px 15px; box-shadow: var(--shadow); }
+  .module h3 { font-size: 0.97rem; font-weight: 700; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 8px; }
+  .module h3 .tag { margin-left: auto; font-family: var(--mono); font-size: 0.6rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+    background: var(--accent-soft); padding: 2px 6px; border-radius: 5px; white-space: nowrap; }
+  .module p { margin-top: 7px; font-size: 0.855rem; color: var(--muted); line-height: 1.5; }
+
+  /* ---- differentiators ---- */
+  .band { margin: 40px 0; padding: 30px; border-radius: 16px; border: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--surface), var(--surface-2)); }
+  .band .eyebrow { color: var(--teal); }
+  .band h2 { font-size: 1.5rem; font-weight: 780; letter-spacing: -0.022em; margin-top: 8px;
+    max-width: 26ch; text-wrap: balance; }
+  .diffs { margin-top: 22px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .diff { display: flex; gap: 13px; }
+  .diff .k { font-family: var(--mono); font-size: 0.9rem; color: var(--accent); font-weight: 600;
+    padding-top: 2px; }
+  .diff h3 { font-size: 0.98rem; font-weight: 700; letter-spacing: -0.01em; }
+  .diff p { margin-top: 4px; font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+  /* ---- integrations ---- */
+  .rack { padding: 8px 0 4px; }
+  .rack h2, .road h2 { font-size: 1.2rem; font-weight: 740; letter-spacing: -0.02em; margin-top: 8px; }
+  .chips { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 9px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+    padding: 7px 14px; }
+  .chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-fill); display: inline-block; }
+
+  /* ---- roadmap ---- */
+  .road { padding: 44px 0 8px; }
+  .rmgrid { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .rmcol { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  .rmcol .lab { font-family: var(--sans); font-size: 0.78rem; font-weight: 650; letter-spacing: 0; }
+  .rmcol.now .lab { color: var(--good); }
+  .rmcol.next .lab { color: var(--accent); }
+  .rmcol ul { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .rmcol li { font-size: 0.9rem; color: var(--text); padding-left: 18px; position: relative; line-height: 1.45; }
+  .rmcol li::before { content: ""; position: absolute; left: 0; top: 8px; width: 7px; height: 7px;
+    border-radius: 2px; }
+  .rmcol.now li::before { background: var(--good); }
+  .rmcol.next li::before { background: var(--accent-fill); }
+  .rmcol li b { font-weight: 650; }
+
+  /* ---- footer ---- */
+  .foot { margin-top: 48px; border-top: 1px solid var(--border); padding: 26px 0 60px;
+    display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
+  .foot p { font-size: 0.82rem; color: var(--muted); max-width: 58ch; }
+  .foot .mono { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0;
+    text-transform: none; color: var(--faint); }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 860px) {
+    .stages { grid-template-columns: repeat(4, 1fr); row-gap: 16px; }
+    .pipe .track::after { display: none; }
+    .phase { grid-template-columns: 1fr; gap: 14px; }
+    .phase-head { position: static; }
+  }
+  @media (max-width: 560px) {
+    .modules, .diffs, .rmgrid { grid-template-columns: 1fr; }
+    .stages { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding: 48px 0 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/"><span class="dot"></span><b>Production Hub</b></a>
+    <a class="nav-cta" href="#access">Request early access</a>
+  </div>
+</nav>
+
+<div class="os">
+  <div class="wrap">
+
+    <section class="hero">
+      <p class="eyebrow">The operating system for video production</p>
+      <h1>Run every client project, <span>from pitch to delivery</span>, in one place.</h1>
+      <p class="lede">Commercial production houses and creative agencies stitch together a proposals tool,
+        a project board, a review platform, an e-sign service, an HR &amp; payroll app, a recruitment
+        tool and half a dozen chat threads — none of which talk to each other. Production Hub replaces
+        the stack: win the work, price it,
+        contract it, produce it, review it, deliver it, and run the business behind it, on one system
+        built for how video and content teams actually work.</p>
+      <div class="metaline">
+        <span><b>One platform</b> · 13 modules</span>
+        <span><b>Built-in</b> review, e-sign &amp; AI studio</span>
+        <span><b>Connects</b> your accounting, chat &amp; storage</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn" href="#access">Request early access →</a>
+      </div>
+    </section>
+
+    <section class="netband reveal">
+      <p class="eyebrow">One connected system</p>
+      <h2>Every module shares one core.</h2>
+      <svg class="net" viewBox="0 0 720 360" role="img" aria-label="Diagram: all Production Hub modules connect through one shared core.">
+        <polygon class="ring" points="360,65 533,99 605,180 533,261 360,295 187,261 115,180 187,99" />
+
+        <line class="spoke" x1="360" y1="180" x2="360" y2="65" />
+        <line class="spoke" x1="360" y1="180" x2="533" y2="99" />
+        <line class="spoke" x1="360" y1="180" x2="605" y2="180" />
+        <line class="spoke" x1="360" y1="180" x2="533" y2="261" />
+        <line class="spoke" x1="360" y1="180" x2="360" y2="295" />
+        <line class="spoke" x1="360" y1="180" x2="187" y2="261" />
+        <line class="spoke" x1="360" y1="180" x2="115" y2="180" />
+        <line class="spoke" x1="360" y1="180" x2="187" y2="99" />
+
+        <line class="flow" pathLength="100" x1="360" y1="65"  x2="360" y2="180" style="animation-delay:-0.0s" />
+        <line class="flow" pathLength="100" x1="533" y1="99"  x2="360" y2="180" style="animation-delay:-0.37s" />
+        <line class="flow" pathLength="100" x1="605" y1="180" x2="360" y2="180" style="animation-delay:-0.75s" />
+        <line class="flow" pathLength="100" x1="533" y1="261" x2="360" y2="180" style="animation-delay:-1.12s" />
+        <line class="flow" pathLength="100" x1="360" y1="295" x2="360" y2="180" style="animation-delay:-1.5s" />
+        <line class="flow" pathLength="100" x1="187" y1="261" x2="360" y2="180" style="animation-delay:-1.87s" />
+        <line class="flow" pathLength="100" x1="115" y1="180" x2="360" y2="180" style="animation-delay:-2.25s" />
+        <line class="flow" pathLength="100" x1="187" y1="99"  x2="360" y2="180" style="animation-delay:-2.62s" />
+
+        <g>
+          <circle class="node" cx="360" cy="65"  r="7" /><circle class="node-dot" cx="360" cy="65"  r="2.6" />
+          <circle class="node" cx="533" cy="99"  r="7" /><circle class="node-dot" cx="533" cy="99"  r="2.6" />
+          <circle class="node" cx="605" cy="180" r="7" /><circle class="node-dot" cx="605" cy="180" r="2.6" />
+          <circle class="node" cx="533" cy="261" r="7" /><circle class="node-dot" cx="533" cy="261" r="2.6" />
+          <circle class="node" cx="360" cy="295" r="7" /><circle class="node-dot" cx="360" cy="295" r="2.6" />
+          <circle class="node" cx="187" cy="261" r="7" /><circle class="node-dot" cx="187" cy="261" r="2.6" />
+          <circle class="node" cx="115" cy="180" r="7" /><circle class="node-dot" cx="115" cy="180" r="2.6" />
+          <circle class="node" cx="187" cy="99"  r="7" /><circle class="node-dot" cx="187" cy="99"  r="2.6" />
+        </g>
+
+        <circle class="core" cx="360" cy="180" r="48" />
+        <text class="core-t" x="360" y="176">Production</text>
+        <text class="core-t" x="360" y="192">Hub</text>
+
+        <text class="lab" x="360" y="47"  text-anchor="middle">Win</text>
+        <text class="lab" x="545" y="96"  text-anchor="start">Price</text>
+        <text class="lab" x="618" y="184" text-anchor="start">Contract</text>
+        <text class="lab" x="545" y="268" text-anchor="start">Produce</text>
+        <text class="lab" x="360" y="315" text-anchor="middle">Create</text>
+        <text class="lab" x="175" y="268" text-anchor="end">Review</text>
+        <text class="lab" x="103" y="184" text-anchor="end">Deliver</text>
+        <text class="lab" x="175" y="96"  text-anchor="end">Run</text>
+      </svg>
+      <p class="netcap">A lead becomes a quote becomes a project becomes an invoice — the same client,
+        budget, schedule and assets flow through every module. Nothing is re-entered, nothing drifts
+        out of sync, and there's one source of truth for the whole studio.</p>
+    </section>
+
+    <section class="stack reveal">
+      <p class="eyebrow">Replaces your stack</p>
+      <h2>One subscription instead of ten.</h2>
+      <div class="ledger">
+        <div class="lrow"><span><span class="cat">Project management</span><span class="tool">Monday, Asana · $12/seat</span></span><span class="amt">~ $120 / mo</span></div>
+        <div class="lrow"><span><span class="cat">Client review &amp; approval</span><span class="tool">Frame.io Team · $25/seat</span></span><span class="amt">~ $250 / mo</span></div>
+        <div class="lrow"><span><span class="cat">Proposals &amp; quoting</span><span class="tool">PandaDoc, Qwilr</span></span><span class="amt">~ $90 / mo</span></div>
+        <div class="lrow"><span><span class="cat">E-signatures</span><span class="tool">DocuSign Business Pro</span></span><span class="amt">~ $65 / mo</span></div>
+        <div class="lrow"><span><span class="cat">HR, time &amp; payroll</span><span class="tool">BambooHR + Harvest</span></span><span class="amt">~ $360 / mo</span></div>
+        <div class="lrow"><span><span class="cat">Recruitment &amp; screening</span><span class="tool">Workable, Greenhouse</span></span><span class="amt">~ $170 / mo</span></div>
+        <div class="lrow"><span><span class="cat">Scheduling &amp; call sheets</span><span class="tool">StudioBinder Pro</span></span><span class="amt">~ $125 / mo</span></div>
+        <div class="lrow"><span><span class="cat">Storyboarding</span><span class="tool">Boords</span></span><span class="amt">~ $85 / mo</span></div>
+        <div class="lrow"><span><span class="cat">AI image / video / voice</span><span class="tool">Midjourney, Runway, ElevenLabs</span></span><span class="amt">~ $280 / mo</span></div>
+        <div class="lrow"><span><span class="cat">Review storage &amp; sharing</span><span class="tool">Dropbox $18/seat, Vimeo</span></span><span class="amt">~ $200 / mo</span></div>
+        <div class="lrow sub"><span class="cat">Typical spend — 10-person studio</span><span class="amt">≈ $1,745 / mo</span></div>
+        <div class="lrow repl"><span class="cat">Production Hub — one platform</span><span class="amt">one login, one bill</span></div>
+      </div>
+      <p class="cap">Business-tier 2026 list prices for a ~10-person studio, with per-seat tools (project
+        management, review, HR, storage) multiplied across the team — <b>over $20,000 a year</b>,
+        before the real tax: ten tools that don't share data, so the same client, budget and
+        deliverable get re-keyed over and over. Production Hub is one source of truth.</p>
+    </section>
+
+    <section class="pipe" aria-label="Production lifecycle">
+      <div class="track">
+        <div class="stages">
+          <div class="stage"><span class="n">01</span><span class="s">Win</span></div>
+          <div class="stage"><span class="n">02</span><span class="s">Price</span></div>
+          <div class="stage"><span class="n">03</span><span class="s">Contract</span></div>
+          <div class="stage"><span class="n">04</span><span class="s">Produce</span></div>
+          <div class="stage"><span class="n">05</span><span class="s">Create</span></div>
+          <div class="stage"><span class="n">06</span><span class="s">Review</span></div>
+          <div class="stage"><span class="n">07</span><span class="s">Deliver</span></div>
+          <div class="stage"><span class="n">08</span><span class="s">Run</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="phases">
+
+      <section class="phase reveal">
+        <div class="phase-head">
+          <div class="pn">01 · Win</div>
+          <h2>Sales &amp; pipeline</h2>
+          <p>Find the work and turn conversations into quotes.</p>
+        </div>
+        <div class="modules">
+          <div class="module"><h3>Leads pipeline</h3><p>Kanban stages from first contact to won, with deal values and follow-up reminders.</p></div>
+          <div class="module"><h3>AI prospecting <span class="tag">AI</span></h3><p>Generate qualified leads with live web research, then find and verify contact emails.</p></div>
+          <div class="module"><h3>AI outreach <span class="tag">AI</span></h3><p>Draft email and LinkedIn messages in your voice; a won lead becomes a quote and client in one click.</p></div>
+          <div class="module"><h3>Client records</h3><p>Every client with tier, history and the projects and contracts tied to them.</p></div>
+        </div>
+      </section>
+
+      <section class="phase reveal">
+        <div class="phase-head">
+          <div class="pn">02 · Price</div>
+          <h2>Quotes &amp; estimates</h2>
+          <p>Price consistently and sync it to your books.</p>
+        </div>
+        <div class="modules">
+          <div class="module"><h3>AI cost estimator <span class="tag">AI</span></h3><p>Drafts line items from your own tiered rate card, calibrated to the client and grounded in your billing history.</p></div>
+          <div class="module"><h3>Rate card &amp; discounts</h3><p>Editable rate card, per-line and whole-quote discounts, multi-currency.</p></div>
+          <div class="module"><h3>Accounting sync <span class="tag">connect</span></h3><p>Push a finished quote to your accounting platform as a draft, and pull quotes back to attach live projects.</p></div>
+        </div>
+      </section>
+
+      <section class="phase reveal">
+        <div class="phase-head">
+          <div class="pn">03 · Contract</div>
+          <h2>Contracts &amp; e-signing</h2>
+          <p>Paper the deal without third-party sign fees.</p>
+        </div>
+        <div class="modules">
+          <div class="module"><h3>Document generator</h3><p>Statements of Work and Service Agreements as branded documents with milestone tables and standard clauses.</p></div>
+          <div class="module"><h3>Built-in e-signing</h3><p>Per-party signing links and tamper-evident, hashed document versions with a full audit trail — no per-seat fees.</p></div>
+          <div class="module"><h3>AI contract extraction <span class="tag">AI</span></h3><p>Paste a client contract and auto-pull scope, deliverables, fee, payment terms and milestones for review.</p></div>
+        </div>
+      </section>
+
+      <section class="phase reveal">
+        <div class="phase-head">
+          <div class="pn">04 · Produce</div>
+          <h2>Production management</h2>
+          <p>Everything that moves a shoot from brief to wrap.</p>
+        </div>
+        <div class="modules">
+          <div class="module"><h3>Project boards</h3><p>Drag-and-drop cards, statuses, assignees, due dates, deliverable flags, comments and attachments.</p></div>
+          <div class="module"><h3>AI scheduling &amp; Gantt <span class="tag">AI</span></h3><p>Turn text or a spreadsheet into a dated schedule with holiday awareness, milestones and conflict warnings.</p></div>
+          <div class="module"><h3>Call sheets</h3><p>Branded, exportable call sheets with auto weather and per-crew call times.</p></div>
+          <div class="module"><h3>Crew &amp; freelancers</h3><p>Roster with rates, kit and region, per-project bookings, and a who's-busy workload view.</p></div>
+        </div>
+      </section>
+
+      <section class="phase reveal">
+        <div class="phase-head">
+          <div class="pn">05 · Create</div>
+          <h2>Creative &amp; AI studio</h2>
+          <p>Generate assets and cut the first edit — the creative work, accelerated.</p>
+        </div>
+        <div class="modules">
+          <div class="module"><h3>AI generation studio <span class="tag">AI</span></h3><p>Image, video, voiceover and script tools with reference images and draw-on-image direction — every output tracked to a project budget.</p></div>
+          <div class="module"><h3>Storyboards <span class="tag">AI</span></h3><p>Draft frames from a script, generate frame images, and share a no-login link for client feedback.</p></div>
+          <div class="module"><h3>Edit Assist <span class="tag">AI</span></h3><p>Upload a paper edit, point at the footage, and get a ready-to-open Premiere / Resolve timeline — built for the interview-and-b-roll edits that eat editor hours. Footage never leaves the editor's machine.</p></div>
+        </div>
+      </section>
+
+      <section class="phase reveal">
+        <div class="phase-head">
+          <div class="pn">06 · Review</div>
+          <h2>Review &amp; approval</h2>
+          <p>Collect feedback and sign-off without a separate tool.</p>
+        </div>
+        <div class="modules">
+          <div class="module"><h3>Video review</h3><p>Upload cuts, stack versions, leave timecoded threaded comments, approve or request changes — a built-in alternative to Frame.io.</p></div>
+          <div class="module"><h3>Client review links</h3><p>Branded, no-login pages for fast client sign-off that notify the editor instantly.</p></div>
+          <div class="module"><h3>Client portal</h3><p>Isolated client accounts scoped only to their own projects and review assets.</p></div>
+        </div>
+      </section>
+
+      <section class="phase reveal">
+        <div class="phase-head">
+          <div class="pn">07 · Deliver</div>
+          <h2>Delivery &amp; archive</h2>
+          <p>Ship clean, complete, and on-spec — every time.</p>
+        </div>
+        <div class="modules">
+          <div class="module"><h3>Delivery gates</h3><p>Per-asset sign-off and hard gates so nothing ships until deliverables, manifest and checklist are all complete.</p></div>
+          <div class="module"><h3>Export manifest</h3><p>Auto-generate house-convention filenames and verify the archive is complete before sign-off.</p></div>
+        </div>
+      </section>
+
+      <section class="phase reveal">
+        <div class="phase-head">
+          <div class="pn">08 · Run</div>
+          <h2>Run the business</h2>
+          <p>The back office that keeps the studio solvent and staffed.</p>
+        </div>
+        <div class="modules">
+          <div class="module"><h3>Receivables</h3><p>Live open invoices aged into overdue buckets, with guardrails for unbilled work and missing POs.</p></div>
+          <div class="module"><h3>Contractor invoicing</h3><p>Auto-generate monthly contractor invoices with overtime and unpaid-leave adjustments, through an approval chain.</p></div>
+          <div class="module"><h3>HR management</h3><p>A full people module — clock in/out, timesheets, leave requests &amp; approvals, allowances and balances, payroll export and staff records. Not just a timer.</p></div>
+          <div class="module"><h3>AI recruitment <span class="tag">AI</span></h3><p>A built-in applicant tracking system: post roles with scoring rubrics, bulk-upload CVs, and let AI screen, score and rank every candidate through the interview pipeline.</p></div>
+          <div class="module"><h3>Feedback &amp; team chat <span class="tag">connect</span></h3><p>Client messages triaged into the right project; mentions and delivery events pushed to your team chat.</p></div>
+          <div class="module"><h3>Admin &amp; backups</h3><p>Roles and permissions, integration health, and automated nightly encrypted backups.</p></div>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="band reveal">
+      <p class="eyebrow">Why one system beats the stack</p>
+      <h2>Three things the point tools can't give you together.</h2>
+      <div class="diffs">
+        <div class="diff"><span class="k">▷</span><div><h3>Review is built in</h3><p>Timecoded client review and approval live next to the board and the delivery gate — not in a separate paid subscription.</p></div></div>
+        <div class="diff"><span class="k">✂</span><div><h3>Edit Assist</h3><p>Paper edit in, editable Premiere/Resolve timeline out — built for the interview-and-b-roll corporate edits that eat editor hours. Nothing else ties the assembly to the project.</p></div></div>
+        <div class="diff"><span class="k">$</span><div><h3>AI with a budget</h3><p>Every image, video and voiceover is generated in-app and costed to the project — creative spend you can actually see.</p></div></div>
+        <div class="diff"><span class="k">✎</span><div><h3>Contracts &amp; e-sign, no fees</h3><p>Generate, send and legally sign SOWs and agreements in-house, with a hashed audit trail.</p></div></div>
+      </div>
+    </section>
+
+    <section class="rack reveal">
+      <p class="eyebrow">Everything's connected</p>
+      <h2>Plugs into the tools you already run on.</h2>
+      <div class="chips">
+        <span class="chip"><i></i>Xero</span>
+        <span class="chip"><i></i>QuickBooks</span>
+        <span class="chip"><i></i>Google Chat</span>
+        <span class="chip"><i></i>Slack</span>
+        <span class="chip"><i></i>Microsoft Teams</span>
+        <span class="chip"><i></i>Google Drive</span>
+        <span class="chip"><i></i>Dropbox</span>
+        <span class="chip"><i></i>Google Calendar</span>
+        <span class="chip"><i></i>Premiere / Resolve</span>
+        <span class="chip"><i></i>WhatsApp</span>
+      </div>
+    </section>
+
+    <section class="road reveal">
+      <p class="eyebrow">Where it's going</p>
+      <h2>Now / Next</h2>
+      <div class="rmgrid">
+        <div class="rmcol now">
+          <span class="lab">● Live today</span>
+          <ul>
+            <li>All 13 modules, running a real production company end-to-end</li>
+            <li>Connected to your accounting, chat, storage, calendar &amp; editing tools</li>
+            <li>Built-in review, e-signing, and the AI creative studio</li>
+          </ul>
+        </div>
+        <div class="rmcol next">
+          <span class="lab">→ On the roadmap</span>
+          <ul>
+            <li><b>Setup wizard</b> — a guided path from sign-up to live in minutes</li>
+            <li><b>Multi-company SaaS</b> — tenant isolation, per-company config &amp; billing</li>
+            <li><b>Turn modules on/off</b> per company, so the hub fits each studio</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" id="access">
+      <h2>Ready to replace the stack?</h2>
+      <p>Production Hub is rolling out to a first group of studios. Tell us about your team and we'll
+        get you set up with a walkthrough.</p>
+      <a class="btn" href="mailto:jon@listedcreative.com?subject=Production%20Hub%20%E2%80%94%20early%20access">Request early access →</a>
+    </section>
+
+    <footer class="foot">
+      <p>Built and proven inside a working commercial production company — now a product for the agencies
+        and studios tired of paying for ten tools that don't talk to each other.</p>
+      <span class="mono">© 2026 Production Hub · <a href="mailto:jon@listedcreative.com">jon@listedcreative.com</a></span>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var els = document.querySelectorAll(".reveal");
+    if (reduce || !("IntersectionObserver" in window)) {
+      els.forEach(function (e) { e.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+</body>
+</html>
