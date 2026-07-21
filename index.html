@@ -164,6 +164,24 @@
   .badge-ok { font-size: 0.7rem; font-weight: 700; color: var(--good); background: rgba(88,192,138,0.13);
     padding: 5px 9px; border-radius: 7px; white-space: nowrap; }
 
+  /* ask-the-hub chat mockup */
+  .ask-thread { display: flex; flex-direction: column; gap: 10px; }
+  .ask-q { align-self: flex-end; max-width: 82%; background: var(--accent-fill); color: #fff;
+    font-size: 0.82rem; padding: 9px 13px; border-radius: 12px 12px 3px 12px; line-height: 1.4; }
+  .ask-a { align-self: flex-start; max-width: 94%; background: var(--surface-2); border: 1px solid var(--border);
+    color: var(--muted); font-size: 0.82rem; padding: 11px 13px; border-radius: 12px 12px 12px 3px; line-height: 1.55; }
+  .ask-a b { color: var(--text); font-weight: 650; }
+  .ask-cite { display: inline-flex; align-items: center; gap: 5px; margin-top: 9px; font-size: 0.72rem;
+    font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 7px;
+    padding: 4px 9px; text-decoration: none; }
+
+  /* security / trust */
+  .trust { padding: 66px 0 8px; }
+  .tgrid { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .tcard { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 18px 16px; }
+  .tcard h3 { font-size: 0.98rem; font-weight: 720; letter-spacing: -0.01em; }
+  .tcard p { margin-top: 7px; font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
   /* lifecycle compact */
   .life { padding: 72px 0 8px; }
   .track { position: relative; padding-top: 20px; margin-top: 22px; }
@@ -227,11 +245,13 @@
     .frow { grid-template-columns: 1fr; gap: 20px; padding: 30px 0; }
     .frow.flip .fviz { order: 0; }
     .lgrid { grid-template-columns: repeat(2, 1fr); }
+    .tgrid { grid-template-columns: repeat(2, 1fr); }
     .track::after { display: none; }
   }
   @media (max-width: 560px) {
     .hero { padding: 56px 0 44px; }
     .lgrid { grid-template-columns: 1fr; }
+    .tgrid { grid-template-columns: 1fr; }
     .access { padding: 40px 22px; }
     .lrow { grid-template-columns: 1fr; gap: 3px; padding: 11px 14px; }
     .lrow .amt { font-size: 0.8rem; }
@@ -315,9 +335,32 @@
 <section class="flag" id="flagship">
   <div class="wrap">
     <p class="eyebrow reveal">What makes it different</p>
-    <h2 class="sec reveal">Four things no stack of point tools can do.</h2>
+    <h2 class="sec reveal">Five things no stack of point tools can do.</h2>
 
     <div class="frow reveal">
+      <div class="fcopy">
+        <span class="eyebrow">Ask the Hub</span>
+        <h3>Ask your studio anything — and get a straight answer.</h3>
+        <p>Point tools each answer for their own slice. Production Hub's assistant reads across the
+          whole business — the lead, the quote, the board, the hours, the review status and the invoice
+          for the same job — so it can tell you what's actually blocking a delivery, or what you quoted
+          a client last year versus what it cost you.</p>
+        <p class="vs">Grounded in your live data · permission-aware · <b>read-only</b></p>
+      </div>
+      <div class="fviz frame">
+        <div class="tbar"><i></i><i></i><i></i><span>✨ ask the hub</span></div>
+        <div class="body">
+          <div class="ask-thread">
+            <div class="ask-q">What's blocking delivery on the Hyatt brand film?</div>
+            <div class="ask-a">Two things — <b>2 deliverable cards</b> aren't in the final column, and a
+              <b>client review has been pending 4 days</b>. Export manifest is 80% done.
+              <a class="ask-cite" href="#flagship">→ Hyatt brand film</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="frow flip reveal">
       <div class="fcopy">
         <span class="eyebrow">Client review, built in</span>
         <h3>Timecoded review &amp; approval — next to the board, not in another tab.</h3>
@@ -336,7 +379,7 @@
       </div>
     </div>
 
-    <div class="frow flip reveal">
+    <div class="frow reveal">
       <div class="fcopy">
         <span class="eyebrow">Edit Assist</span>
         <h3>Paper edit in. Premiere timeline out.</h3>
@@ -358,7 +401,7 @@
       </div>
     </div>
 
-    <div class="frow reveal">
+    <div class="frow flip reveal">
       <div class="fcopy">
         <span class="eyebrow">The AI studio, with a budget</span>
         <h3>Image, video, voice &amp; sound — costed to the project.</h3>
@@ -377,7 +420,7 @@
       </div>
     </div>
 
-    <div class="frow flip reveal">
+    <div class="frow reveal">
       <div class="fcopy">
         <span class="eyebrow">Contracts &amp; e-signing</span>
         <h3>Quote → contract → signature, without per-envelope fees.</h3>
@@ -490,6 +533,23 @@
       <span class="chip"><i></i>Google Calendar</span>
       <span class="chip"><i></i>Premiere / Resolve</span>
       <span class="chip"><i></i>WhatsApp</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY / TRUST -->
+<section class="trust reveal">
+  <div class="wrap">
+    <p class="eyebrow">Built to be trusted</p>
+    <h2 class="sec">Your studio's data, handled properly.</h2>
+    <p class="sub">Client work, budgets and contracts live in here — so access, integrity and privacy are built in, not bolted on.</p>
+    <div class="tgrid">
+      <div class="tcard"><h3>Role-based access</h3><p>Editors see their work — not the P&amp;L. Budgets, margins and salaries stay with the people who should see them.</p></div>
+      <div class="tcard"><h3>Permission-aware AI</h3><p>The assistant can only ever surface what you're already allowed to see — and it's read-only, so it can't change a thing.</p></div>
+      <div class="tcard"><h3>Tamper-evident contracts</h3><p>Every signature is hash-verified against a frozen document, with a full, append-only audit trail.</p></div>
+      <div class="tcard"><h3>Encrypted backups</h3><p>Your whole hub is backed up automatically every night — encrypted and off-site.</p></div>
+      <div class="tcard"><h3>Your data stays yours</h3><p>Isolated per studio. We never train AI models on your projects, clients or numbers.</p></div>
+      <div class="tcard"><h3>Clients stay contained</h3><p>Review links and client portals are scoped to a single client — with no path into your workspace.</p></div>
     </div>
   </div>
 </section>
