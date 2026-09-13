@@ -1,235 +1,308 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Production Hub — The operating system for video production</title>
-  <meta name="description" content="One platform to run a video production studio end-to-end — sales, quotes, contracts, production, review, delivery and the back office. Replaces the ten disconnected tools agencies pay ~$20k a year for." />
-  <meta name="theme-color" content="#0d1219" />
+  <meta name="description" content="Twenty-six modules across creative, production and the back office — sharing one definition of the brand, the cast and the budget. Built inside a working production company to replace the ten tools studios pay ~$20k a year for." />
+  <meta name="theme-color" content="#0c0d10" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Production Hub — The operating system for video production" />
-  <meta property="og:description" content="Ten tools. One platform. Built inside a working production studio — win it, make it, deliver it, get paid for it." />
+  <meta property="og:description" content="Concept to cut to cash. Twenty-six modules, three layers, one project thread — built inside a working production company." />
   <meta property="og:url" content="https://productionhub.co" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" />
 <style>
+  /* ---------------------------------------------------------------
+     Tokens mirror the LC Hub design system ("Production floor"):
+     DM Sans, ink surfaces, sky as the only accent, pills everywhere,
+     14px card radius. Dark-first but not forced — the toggle stays.
+     --------------------------------------------------------------- */
   :root {
-    --bg: #0d1219; --surface: #151c26; --surface-2: #1b2431; --border: #283340;
-    --text: #e9eef4; --muted: #9daabb; --faint: #6b7887;
-    --accent: #57a0ff; --accent-fill: #4790f2; --accent-soft: rgba(87,160,255,0.16);
-    --teal: #46b0bd; --good: #58c08a; --bad: #e06a6a;
-    --ruler: rgba(233,238,244,0.16);
-    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 18px 40px rgba(0,0,0,0.35);
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --bg: #0c0d10; --bar: #0f1014; --surface: #131418; --surface-2: #17181d;
+    --border: #1d1f25; --border-2: #22242b;
+    --text: #e7e8ea; --muted: #9aa1ad; --faint: #6e7481;
+    --accent: #7dd3fc; --accent-fill: #38bdf8; --accent-deep: #0ea5e9;
+    --accent-soft: rgba(56,189,248,0.14); --on-accent: #0c0d10;
+    --good: #34d399; --good-soft: rgba(52,211,153,0.13);
+    --warn: #fbbf24; --bad: #f87171; --people: #a78bfa;
+    --ruler: rgba(231,232,234,0.14);
+    --shadow: 0 1px 2px rgba(0,0,0,0.5), 0 18px 44px rgba(0,0,0,0.38);
+    --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --r-card: 14px; --r-inset: 10px;
   }
+  html.light {
+    --bg: #f3f4f7; --bar: #ffffff; --surface: #ffffff; --surface-2: #f3f4f7;
+    --border: #e3e6eb; --border-2: #dcdfe5;
+    --text: #1b1c20; --muted: #4f535b; --faint: #6a6f78;
+    --accent: #0284c7; --accent-fill: #38bdf8; --accent-deep: #0369a1;
+    --accent-soft: rgba(56,189,248,0.18); --on-accent: #0c0d10;
+    --good: #047857; --good-soft: rgba(4,120,87,0.12);
+    --warn: #b45309; --bad: #dc2626; --people: #6d28d9;
+    --ruler: rgba(27,28,32,0.13);
+    --shadow: 0 1px 2px rgba(16,20,28,0.06), 0 16px 36px rgba(16,20,28,0.09);
+  }
+  html { color-scheme: dark; } html.light { color-scheme: light; }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 78px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 82px; }
   body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans);
-    line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  :where(h1,h2,h3,p,ul) { margin: 0; }
+    line-height: 1.6; font-feature-settings: "tnum"; -webkit-font-smoothing: antialiased; }
+  :where(h1,h2,h3,h4,p,ul) { margin: 0; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-  .eyebrow { font-size: 0.85rem; font-weight: 650; color: var(--accent); }
-  h2.sec { font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.026em;
+  .eyebrow { font-size: 0.85rem; font-weight: 600; color: var(--accent); }
+  h2.sec { font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 700; letter-spacing: -0.026em;
     margin-top: 8px; text-wrap: balance; }
   .sub { margin-top: 10px; color: var(--muted); max-width: 62ch; text-wrap: pretty; }
 
-  /* nav */
-  .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 84%, transparent);
-    backdrop-filter: saturate(140%) blur(10px); -webkit-backdrop-filter: saturate(140%) blur(10px);
+  /* ---- command bar ---- */
+  .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bar) 86%, transparent);
+    backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px);
     border-bottom: 1px solid var(--border); }
-  .nav-in { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+  .nav-in { max-width: 1080px; margin: 0 auto; padding: 11px 24px; display: flex; align-items: center; gap: 14px; }
+  .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--text); }
   .brand .dot { width: 11px; height: 11px; border-radius: 3px; background: var(--accent-fill); box-shadow: 0 0 0 4px var(--accent-soft); }
-  .brand b { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; }
-  .btn { display: inline-block; background: var(--accent-fill); color: #fff; font-size: 0.95rem; font-weight: 650;
-    text-decoration: none; padding: 12px 22px; border-radius: 10px; transition: filter .15s ease; }
-  .btn:hover { filter: brightness(1.1); }
-  .btn.ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
-  .nav-cta { font-size: 0.88rem; font-weight: 650; text-decoration: none; color: #fff; background: var(--accent-fill); padding: 9px 16px; border-radius: 9px; }
-  .nav-cta:hover { filter: brightness(1.1); }
-  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .brand b { font-size: 1.02rem; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+  .navlinks { display: flex; gap: 4px; margin-left: 8px; }
+  .navlinks a { font-size: 0.86rem; font-weight: 500; color: var(--muted); text-decoration: none;
+    padding: 6px 13px; border-radius: 999px; border: 1px solid transparent; white-space: nowrap; }
+  .navlinks a:hover { color: var(--text); border-color: var(--border-2); background: var(--surface); }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .themetog { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 999px; cursor: pointer;
+    background: var(--surface); border: 1px solid var(--border-2); color: var(--muted); font-size: 0.82rem;
+    font-family: var(--sans); line-height: 1; padding: 0; }
+  .themetog:hover { color: var(--text); }
+  .nav-cta { font-size: 0.86rem; font-weight: 600; text-decoration: none; color: var(--on-accent);
+    background: var(--accent-fill); padding: 8px 16px; border-radius: 999px; white-space: nowrap; }
+  .nav-cta:hover { filter: brightness(1.08); }
+  .btn { display: inline-block; background: var(--accent-fill); color: var(--on-accent); font-size: 0.95rem;
+    font-weight: 600; text-decoration: none; padding: 12px 24px; border-radius: 999px; transition: filter .15s ease; }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); }
+  .btn.ghost:hover { background: var(--surface); filter: none; }
+  a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid var(--accent-fill); outline-offset: 3px; }
 
-  /* hero */
-  .hero { position: relative; padding: 88px 0 64px; overflow: hidden; }
+  /* ---- hero ---- */
+  .hero { position: relative; padding: 84px 0 62px; overflow: hidden; }
   .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(900px 420px at 78% -10%, rgba(87,160,255,0.13), transparent 60%); }
+    background: radial-gradient(900px 420px at 78% -10%, rgba(56,189,248,0.12), transparent 60%); }
   .hero > .wrap { position: relative; }
   .strike-row { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 22px; }
-  .strike { position: relative; font-size: 0.95rem; font-weight: 600; color: var(--faint); }
+  .strike { position: relative; font-size: 0.95rem; font-weight: 500; color: var(--faint); }
   .strike::after { content: ""; position: absolute; left: -2%; right: -2%; top: 52%; height: 2px;
     background: var(--bad); transform: rotate(-4deg); border-radius: 2px; opacity: 0.9; }
-  .hero h1 { font-size: clamp(2.1rem, 5.6vw + 0.6rem, 5rem); font-weight: 800; letter-spacing: -0.032em;
+  .hero h1 { font-size: clamp(2.1rem, 5.6vw + 0.6rem, 4.8rem); font-weight: 700; letter-spacing: -0.034em;
     line-height: 1.04; text-wrap: balance; max-width: 15ch; overflow-wrap: break-word; }
   .hero h1 span { color: var(--accent); }
-  .hero .lede { margin-top: 24px; font-size: clamp(1.1rem, 2.1vw, 1.3rem); color: var(--muted);
-    max-width: 46ch; text-wrap: pretty; line-height: 1.55; }
-  .hero-cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
-  .stats { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 760px; }
-  .stat b { display: block; font-size: clamp(1.5rem, 3.4vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em;
+  .hero .lede { margin-top: 24px; font-size: clamp(1.1rem, 2.1vw, 1.28rem); color: var(--muted);
+    max-width: 52ch; text-wrap: pretty; line-height: 1.55; }
+  .hero-cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .stats { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 780px; }
+  .stat b { display: block; font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700; letter-spacing: -0.03em;
     font-variant-numeric: tabular-nums; }
   .stat b em { font-style: normal; color: var(--accent); }
   .stat span { font-size: 0.82rem; color: var(--faint); }
 
-  /* credibility strip */
-  .cred { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    background: var(--surface); }
-  .cred-in { max-width: 1080px; margin: 0 auto; padding: 26px 24px; display: flex; flex-wrap: wrap;
-    align-items: center; gap: 10px 34px; }
-  .cred p { font-size: 1.02rem; color: var(--text); font-weight: 600; }
-  .cred p b { color: var(--accent); }
+  /* ---- credibility strip ---- */
+  .cred { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+  .cred-in { max-width: 1080px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap;
+    align-items: center; gap: 10px 30px; }
+  .cred p { font-size: 1rem; color: var(--text); font-weight: 500; }
+  .cred p b { color: var(--accent); font-weight: 600; }
   .cred small { font-size: 0.85rem; color: var(--faint); }
 
-  /* receipt / ledger */
+  /* ---- receipt / ledger ---- */
   .stack { padding: 72px 0 8px; }
-  .stack .big-money { font-size: clamp(1.7rem, 4.2vw + 0.4rem, 3.6rem); font-weight: 800; letter-spacing: -0.03em; }
+  .stack .big-money { font-size: clamp(1.7rem, 4.2vw + 0.4rem, 3.4rem); font-weight: 700; letter-spacing: -0.032em; }
   .stack .big-money em { font-style: normal; color: var(--accent); }
-  .ledger { margin-top: 26px; border: 1px solid var(--border); border-radius: 14px;
+  .ledger { margin-top: 26px; border: 1px solid var(--border-2); border-radius: var(--r-card);
     background: var(--surface); overflow: hidden; box-shadow: var(--shadow); }
   .lrow { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline;
     padding: 12px 18px; border-bottom: 1px solid var(--border); }
-  .lrow .cat { font-weight: 640; letter-spacing: -0.01em; }
+  .lrow .cat { font-weight: 600; letter-spacing: -0.01em; }
   .lrow .tool { color: var(--faint); font-size: 0.8rem; margin-left: 9px; }
   .lrow .amt { font-family: var(--mono); font-size: 0.85rem; color: var(--muted);
     font-variant-numeric: tabular-nums; white-space: nowrap; }
   .lrow.sub { background: var(--surface-2); }
   .lrow.sub .cat { font-weight: 700; }
-  .lrow.sub .amt { color: var(--text); font-weight: 700; }
+  .lrow.sub .amt { color: var(--text); font-weight: 500; }
   .lrow.repl { background: var(--accent-soft); border-bottom: none; }
-  .lrow.repl .cat { color: var(--accent); font-weight: 750; }
-  .lrow.repl .amt { color: var(--accent); font-weight: 750; }
+  .lrow.repl .cat, .lrow.repl .amt { color: var(--accent); font-weight: 700; }
   .cap { margin-top: 13px; font-size: 0.78rem; color: var(--faint); max-width: 66ch; line-height: 1.5; }
 
-  /* flagship features */
+  /* ---- three layers ---- */
+  .layers { padding: 72px 0 8px; }
+  .lstack { margin-top: 24px; display: grid; gap: 12px; }
+  .layer { background: var(--surface); border: 1px solid var(--border-2); border-radius: var(--r-card);
+    padding: 20px 22px; display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 24px; }
+  .layer-id { display: grid; gap: 6px; align-content: start; }
+  .layer-id .n { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); }
+  .layer-id .name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+  .layer-id .kind { font-size: 0.8rem; color: var(--faint); }
+  .layer-body p { color: var(--muted); line-height: 1.6; }
+  .pills { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill { font-size: 0.78rem; font-weight: 500; color: var(--muted); background: var(--surface-2);
+    border: 1px solid var(--border); border-radius: 999px; padding: 4px 11px; }
+  .thread { margin-top: 14px; border-left: 2px solid var(--accent-fill); background: var(--surface);
+    border-radius: 0 var(--r-inset) var(--r-inset) 0; padding: 15px 18px; }
+  .thread p { color: var(--muted); line-height: 1.6; max-width: 70ch; }
+  .thread p b { color: var(--text); font-weight: 600; }
+
+  /* ---- flagship features ---- */
   .flag { padding: 72px 0 10px; }
   .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; padding: 38px 0; }
   .frow + .frow { border-top: 1px solid var(--border); }
   .frow.flip .fviz { order: -1; }
   .fcopy .eyebrow { display: block; }
-  .fcopy h3 { margin-top: 6px; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 780; letter-spacing: -0.024em; }
+  .fcopy h3 { margin-top: 6px; font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 700; letter-spacing: -0.026em; line-height: 1.2; }
   .fcopy p { margin-top: 12px; color: var(--muted); line-height: 1.6; max-width: 46ch; }
   .fcopy .vs { margin-top: 14px; font-size: 0.85rem; color: var(--faint); }
-  .fcopy .vs b { color: var(--good); font-weight: 650; }
+  .fcopy .vs b { color: var(--good); font-weight: 600; }
 
-  /* mockup frames */
-  .frame { background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  /* ---- mockup frames ---- */
+  .frame { background: var(--surface); border: 1px solid var(--border-2); border-radius: var(--r-card);
     box-shadow: var(--shadow); overflow: hidden; }
   .frame .tbar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
-  .frame .tbar i { width: 9px; height: 9px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); }
+  .frame .tbar i { width: 9px; height: 9px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border-2); }
   .frame .tbar span { margin-left: 8px; font-family: var(--mono); font-size: 0.68rem; color: var(--faint); }
   .frame .body { padding: 16px; }
+
+  /* continuity sheet */
+  .anchor-head { display: flex; align-items: center; gap: 10px; }
+  .anchor-head .av { width: 34px; height: 34px; border-radius: 999px; flex: none;
+    background: linear-gradient(135deg,#2a4f76,#101f33); border: 1px solid var(--border-2); }
+  .anchor-head .nm { font-size: 0.86rem; font-weight: 600; }
+  .anchor-head .rl { font-size: 0.74rem; color: var(--faint); }
+  .lock { margin-top: 11px; background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: var(--r-inset); padding: 9px 12px; font-size: 0.74rem; color: var(--muted); line-height: 1.5; }
+  .lock b { color: var(--accent); font-weight: 500; }
+  .strip { margin-top: 11px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+  .strip i { height: 52px; border-radius: 8px; display: block; border: 1px solid var(--border-2); }
+  .strip i:nth-child(1){ background: linear-gradient(135deg,#2f5a82,#122238); }
+  .strip i:nth-child(2){ background: linear-gradient(135deg,#2a5270,#0f1e30); }
+  .strip i:nth-child(3){ background: linear-gradient(135deg,#34608a,#14263c); }
+  .strip i:nth-child(4){ background: linear-gradient(135deg,#274a71,#0f2036); }
+  .attached { margin-top: 11px; display: flex; align-items: center; gap: 7px; font-size: 0.74rem; color: var(--good); }
 
   .vid { position: relative; height: 120px; border-radius: 8px; overflow: hidden;
     background: linear-gradient(135deg, #22405f, #12233a 55%, #1d3b57); }
   .vid::after { content: "▶"; position: absolute; inset: 0; display: grid; place-items: center;
     color: rgba(255,255,255,0.85); font-size: 1.6rem; }
   .tc-row { display: flex; gap: 10px; align-items: flex-start; padding: 9px 4px; border-bottom: 1px solid var(--border); }
-  .tc-row:last-child { border-bottom: none; }
+  .tc-row:last-of-type { border-bottom: none; }
   .tc { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); padding-top: 2px; white-space: nowrap; }
   .tc-row p { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
   .tc-row .who { color: var(--text); font-weight: 600; }
-  .approve { margin-top: 10px; display: inline-block; background: rgba(88,192,138,0.15); color: var(--good);
-    font-size: 0.75rem; font-weight: 700; padding: 5px 10px; border-radius: 7px; }
+  .approve { margin-top: 10px; display: inline-block; background: var(--good-soft); color: var(--good);
+    font-size: 0.75rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; }
 
   .paper { font-size: 0.74rem; color: var(--muted); line-height: 1.7; }
   .paper b { color: var(--text); }
   .paper .hl { background: var(--accent-soft); color: var(--accent); border-radius: 3px; padding: 0 3px; }
-  .tl { margin-top: 14px; border-top: 1px dashed var(--border); padding-top: 12px; }
+  .tl { margin-top: 14px; border-top: 1px dashed var(--border-2); padding-top: 12px; }
   .tl .lab { font-family: var(--mono); font-size: 0.64rem; color: var(--faint); letter-spacing: 0.04em; }
   .tl-track { margin-top: 6px; display: flex; gap: 4px; height: 26px; }
-  .tl-track i { border-radius: 4px; background: linear-gradient(180deg, #2f7be6, #1f5fd0); opacity: 0.9; }
-  .tl-track i:nth-child(1){ flex: 3; } .tl-track i:nth-child(2){ flex: 2; opacity: .75; }
-  .tl-track i:nth-child(3){ flex: 4; } .tl-track i:nth-child(4){ flex: 1.4; opacity: .75; }
+  .tl-track i { border-radius: 4px; background: linear-gradient(180deg, #38bdf8, #0ea5e9); opacity: 0.9; }
+  .tl-track i:nth-child(1){ flex: 3; } .tl-track i:nth-child(2){ flex: 2; opacity: .7; }
+  .tl-track i:nth-child(3){ flex: 4; } .tl-track i:nth-child(4){ flex: 1.4; opacity: .7; }
   .tl-track i:nth-child(5){ flex: 2.6; }
 
-  .prompt { display: flex; gap: 8px; align-items: center; background: var(--surface-2); border: 1px solid var(--border);
-    border-radius: 9px; padding: 9px 12px; font-size: 0.78rem; color: var(--muted); }
-  .prompt b { color: var(--accent); font-weight: 700; }
-  .gen { margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .gen i { height: 64px; border-radius: 8px; display: block; }
-  .gen i:nth-child(1){ background: linear-gradient(135deg,#274a71,#0f2036); }
-  .gen i:nth-child(2){ background: linear-gradient(135deg,#1d5f66,#0d2b31); }
-  .gen i:nth-child(3){ background: linear-gradient(135deg,#40507a,#161d33); }
-  .spend { margin-top: 12px; display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.75rem; color: var(--faint); }
-  .spend b { font-family: var(--mono); color: var(--text); font-weight: 700; }
+  .led-row { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center;
+    padding: 8px 2px; border-bottom: 1px solid var(--border); font-size: 0.76rem; }
+  .led-row:last-of-type { border-bottom: none; }
+  .led-row .w { color: var(--text); }
+  .led-row .m { color: var(--faint); font-size: 0.7rem; }
+  .led-row .c { font-family: var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .led-total { margin-top: 11px; display: flex; justify-content: space-between; align-items: center;
+    background: var(--accent-soft); border-radius: var(--r-inset); padding: 9px 12px; font-size: 0.78rem; color: var(--accent); }
+  .led-total b { font-family: var(--mono); font-weight: 500; }
 
   .doc-line { height: 7px; border-radius: 4px; background: var(--surface-2); margin: 9px 0; }
   .doc-line.w60 { width: 60%; } .doc-line.w85 { width: 85%; } .doc-line.w40 { width: 40%; }
   .sig { display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    border-top: 1px dashed var(--border); margin-top: 14px; padding-top: 12px; }
+    border-top: 1px dashed var(--border-2); margin-top: 14px; padding-top: 12px; }
   .sig svg { width: 110px; height: 34px; }
   .sig path { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; }
-  .badge-ok { font-size: 0.7rem; font-weight: 700; color: var(--good); background: rgba(88,192,138,0.13);
-    padding: 5px 9px; border-radius: 7px; white-space: nowrap; }
+  .badge-ok { font-size: 0.7rem; font-weight: 600; color: var(--good); background: var(--good-soft);
+    padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
 
-  /* ask-the-hub chat mockup */
   .ask-thread { display: flex; flex-direction: column; gap: 10px; }
-  .ask-q { align-self: flex-end; max-width: 82%; background: var(--accent-fill); color: #fff;
+  .ask-q { align-self: flex-end; max-width: 82%; background: var(--accent-fill); color: var(--on-accent);
     font-size: 0.82rem; padding: 9px 13px; border-radius: 12px 12px 3px 12px; line-height: 1.4; }
   .ask-a { align-self: flex-start; max-width: 94%; background: var(--surface-2); border: 1px solid var(--border);
     color: var(--muted); font-size: 0.82rem; padding: 11px 13px; border-radius: 12px 12px 12px 3px; line-height: 1.55; }
-  .ask-a b { color: var(--text); font-weight: 650; }
+  .ask-a b { color: var(--text); font-weight: 600; }
   .ask-cite { display: inline-flex; align-items: center; gap: 5px; margin-top: 9px; font-size: 0.72rem;
-    font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 7px;
-    padding: 4px 9px; text-decoration: none; }
+    font-weight: 500; color: var(--accent); background: var(--accent-soft); border-radius: 999px;
+    padding: 4px 11px; text-decoration: none; }
 
-  /* security / trust */
+  /* ---- module call sheet ---- */
+  .inv { padding: 72px 0 8px; }
+  .sheet { margin-top: 24px; border: 1px solid var(--border-2); border-radius: var(--r-card);
+    background: var(--surface); overflow: hidden; }
+  .sheet-band { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; padding: 11px 18px;
+    background: var(--surface-2); border-bottom: 1px solid var(--border-2); border-top: 1px solid var(--border-2); }
+  .sheet-band:first-child { border-top: none; }
+  .sheet-band b { font-size: 0.92rem; font-weight: 700; letter-spacing: -0.01em; }
+  .sheet-band span { font-size: 0.8rem; color: var(--faint); }
+  .mrow { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; padding: 13px 18px;
+    border-bottom: 1px solid var(--border); align-items: start; }
+  .mrow:last-child { border-bottom: none; }
+  .mrow .slug { font-size: 0.86rem; font-weight: 600; color: var(--accent); letter-spacing: -0.01em; }
+  .mrow .d { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
+
+  /* ---- guardrails ---- */
+  .guard { padding: 72px 0 8px; }
+  .ggrid { margin-top: 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .gcard { background: var(--surface); border: 1px solid var(--border-2); border-radius: var(--r-card); padding: 18px 20px; }
+  .gcard h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.015em; }
+  .gcard p { margin-top: 7px; font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
+
+  /* ---- security / trust ---- */
   .trust { padding: 66px 0 8px; }
-  .tgrid { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .tcard { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 18px 16px; }
-  .tcard h3 { font-size: 0.98rem; font-weight: 720; letter-spacing: -0.01em; }
+  .tgrid { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .tcard { background: var(--surface); border: 1px solid var(--border-2); border-radius: var(--r-card); padding: 18px 18px 16px; }
+  .tcard h3 { font-size: 0.96rem; font-weight: 700; letter-spacing: -0.012em; }
   .tcard p { margin-top: 7px; font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
 
-  /* lifecycle compact */
-  .life { padding: 72px 0 8px; }
-  .track { position: relative; padding-top: 20px; margin-top: 22px; }
-  .track::before { content: ""; position: absolute; top: 8px; left: 0; right: 0; height: 1px; background: var(--ruler); }
-  .track::after { content: ""; position: absolute; top: 3px; left: 0; right: 0; height: 6px;
-    background-image: repeating-linear-gradient(90deg, var(--ruler) 0 1px, transparent 1px 40px); }
-  .lgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  .lcell { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 15px 16px; }
-  .lcell .n { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); }
-  .lcell h3 { font-size: 1rem; font-weight: 720; letter-spacing: -0.01em; margin: 3px 0 8px; }
-  .lcell ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
-  .lcell li { font-size: 0.8rem; color: var(--muted); line-height: 1.4; padding-left: 13px; position: relative; }
-  .lcell li::before { content: ""; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 2px; background: var(--accent-fill); opacity: 0.7; }
-
-  /* connected diagram */
+  /* ---- connected diagram ---- */
   .netband { padding: 72px 0 12px; text-align: center; }
   .net { display: block; width: 100%; height: auto; max-width: 760px; margin: 18px auto 6px; overflow: visible; }
-  .net .ring { fill: none; stroke: var(--border); stroke-width: 1; opacity: 0.7; }
-  .net .spoke { stroke: var(--border); stroke-width: 1.3; }
-  .net .flow { stroke: var(--accent); stroke-width: 2; stroke-linecap: round;
-    stroke-dasharray: 3 100; opacity: 0.8; animation: hubflow 3s linear infinite; }
-  .net .node { fill: var(--surface); stroke: var(--accent); stroke-width: 1.6; }
+  .net .ring { fill: none; stroke: var(--border-2); stroke-width: 1; opacity: 0.85; }
+  .net .spoke { stroke: var(--border-2); stroke-width: 1.3; }
+  .net .flow { stroke: var(--accent-fill); stroke-width: 2; stroke-linecap: round;
+    stroke-dasharray: 3 100; opacity: 0.85; animation: hubflow 3s linear infinite; }
+  .net .node { fill: var(--surface); stroke: var(--accent-fill); stroke-width: 1.6; }
   .net .node-dot { fill: var(--accent-fill); }
-  .net .core { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
-  .net .core-t { fill: var(--accent); font-family: var(--sans); font-weight: 750; font-size: 12.5px; text-anchor: middle; }
-  .net .lab { fill: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 550; }
+  .net .core { fill: var(--accent-soft); stroke: var(--accent-fill); stroke-width: 1.6; }
+  .net .core-t { fill: var(--accent); font-family: var(--sans); font-weight: 700; font-size: 12.5px; text-anchor: middle; }
+  .net .lab { fill: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 500; }
   @keyframes hubflow { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
-  .netcap { margin: 14px auto 0; font-size: 0.9rem; color: var(--muted); max-width: 60ch; line-height: 1.6; }
+  .netcap { margin: 14px auto 0; font-size: 0.9rem; color: var(--muted); max-width: 62ch; line-height: 1.6; }
 
-  /* integrations */
+  /* ---- integrations ---- */
   .rack { padding: 56px 0 8px; }
-  .chips { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 9px; }
+  .chips { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
   .chip { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem;
-    background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 7px 14px; }
+    background: var(--surface); border: 1px solid var(--border-2); border-radius: 999px; padding: 7px 15px; }
   .chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-fill); }
 
-  /* early access */
-  .access { margin: 72px 0 20px; padding: 54px 40px; border-radius: 18px; border: 1px solid var(--border);
+  /* ---- early access ---- */
+  .access { margin: 72px 0 20px; padding: 54px 40px; border-radius: 18px; border: 1px solid var(--border-2);
     background: linear-gradient(180deg, var(--surface), var(--surface-2)); text-align: center; position: relative; overflow: hidden; }
   .access::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(600px 260px at 50% -20%, rgba(87,160,255,0.14), transparent 65%); }
+    background: radial-gradient(600px 260px at 50% -20%, rgba(56,189,248,0.14), transparent 65%); }
   .access > * { position: relative; }
-  .access h2 { font-size: clamp(1.8rem, 4.4vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; text-wrap: balance; }
-  .access p { margin: 14px auto 0; max-width: 54ch; color: var(--muted); line-height: 1.6; }
-  .access ul { list-style: none; padding: 0; margin: 22px auto 0; display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center; }
+  .access h2 { font-size: clamp(1.8rem, 4.4vw, 2.5rem); font-weight: 700; letter-spacing: -0.032em; text-wrap: balance; }
+  .access p { margin: 14px auto 0; max-width: 56ch; color: var(--muted); line-height: 1.6; }
+  .access ul { list-style: none; padding: 0; margin: 22px auto 0; display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: center; }
   .access li { font-size: 0.9rem; color: var(--text); }
   .access li::before { content: "✓ "; color: var(--good); font-weight: 700; }
-  .access .btn { margin-top: 28px; font-size: 1.02rem; padding: 14px 30px; }
+  .access .btn { margin-top: 28px; font-size: 1rem; padding: 14px 30px; }
 
   .foot { border-top: 1px solid var(--border); margin-top: 40px; padding: 28px 0 60px;
     display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
@@ -240,24 +313,29 @@
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.in { opacity: 1; transform: none; }
 
+  @media (max-width: 940px) { .navlinks { display: none; } }
   @media (max-width: 860px) {
     .stats { grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
     .frow { grid-template-columns: 1fr; gap: 20px; padding: 30px 0; }
     .frow.flip .fviz { order: 0; }
-    .lgrid { grid-template-columns: repeat(2, 1fr); }
+    .layer { grid-template-columns: 1fr; gap: 12px; }
     .tgrid { grid-template-columns: repeat(2, 1fr); }
-    .track::after { display: none; }
   }
   @media (max-width: 560px) {
     .hero { padding: 56px 0 44px; }
-    .lgrid { grid-template-columns: 1fr; }
-    .tgrid { grid-template-columns: 1fr; }
+    .tgrid, .ggrid { grid-template-columns: 1fr; }
+    .mrow { grid-template-columns: 1fr; gap: 5px; }
     .access { padding: 40px 22px; }
     .lrow { grid-template-columns: 1fr; gap: 3px; padding: 11px 14px; }
     .lrow .amt { font-size: 0.8rem; }
     .lrow .tool { display: block; margin-left: 0; }
     .strike { font-size: 0.85rem; }
     .stats { gap: 14px 10px; }
+    .nav-in { padding: 10px 18px; gap: 10px; }
+    .brand b { font-size: 0.95rem; }
+    .nav-cta { font-size: 0.8rem; padding: 8px 13px; }
+    .themetog { width: 30px; height: 30px; }
+    .wrap { padding: 0 18px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
@@ -265,13 +343,31 @@
     html { scroll-behavior: auto; }
   }
 </style>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("ph-theme");
+      var prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+      if (saved === "light" || (!saved && prefersLight)) document.documentElement.classList.add("light");
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-in">
     <a class="brand" href="/"><span class="dot"></span><b>Production Hub</b></a>
-    <a class="nav-cta" href="#access">Request early access</a>
+    <div class="navlinks">
+      <a href="#layers">How it fits together</a>
+      <a href="#flagship">What's different</a>
+      <a href="#modules">Modules</a>
+      <a href="#trust">Trust</a>
+    </div>
+    <div class="nav-right">
+      <button class="themetog" id="theme" type="button" aria-label="Switch between light and dark">◐</button>
+      <a class="nav-cta" href="#access">Request early access</a>
+    </div>
   </div>
 </nav>
 
@@ -279,19 +375,20 @@
 <section class="hero">
   <div class="wrap">
     <div class="strike-row" aria-label="Tools replaced">
-      <span class="strike">Monday</span><span class="strike">Frame.io</span><span class="strike">DocuSign</span><span class="strike">StudioBinder</span><span class="strike">Boords</span><span class="strike">BambooHR</span><span class="strike">Harvest</span><span class="strike">Workable</span><span class="strike">PandaDoc</span><span class="strike">Dropbox</span>
+      <span class="strike">Frame.io</span><span class="strike">StudioBinder</span><span class="strike">Monday</span><span class="strike">DocuSign</span><span class="strike">Boords</span><span class="strike">BambooHR</span><span class="strike">Harvest</span><span class="strike">Workable</span><span class="strike">PandaDoc</span><span class="strike">Dropbox</span>
     </div>
     <h1>The operating system for <span>video production</span>.</h1>
-    <p class="lede">Win it, make it, deliver it, get paid for it — on one platform instead of ten apps
-      that don't talk to each other. One login. One bill. One source of truth.</p>
+    <p class="lede">Concept to cut to cash, on one platform instead of ten apps that don't talk to each
+      other. Define the brand and the cast once — every board, every generation, every document
+      downstream obeys it.</p>
     <div class="hero-cta">
       <a class="btn" href="#access">Request early access →</a>
-      <a class="btn ghost" href="#flagship">See what's inside</a>
+      <a class="btn ghost" href="#layers">See what's inside</a>
     </div>
     <div class="stats">
-      <div class="stat"><b>10 <em>→</em> 1</b><span>tools replaced</span></div>
+      <div class="stat"><b>26</b><span>modules, one core</span></div>
+      <div class="stat"><b>3</b><span>layers, one project thread</span></div>
       <div class="stat"><b><em>~$20k</em>/yr</b><span>back in your budget</span></div>
-      <div class="stat"><b>17</b><span>modules, one core</span></div>
       <div class="stat"><b>1</b><span>login for the whole studio</span></div>
     </div>
   </div>
@@ -300,8 +397,8 @@
 <!-- CREDIBILITY -->
 <section class="cred">
   <div class="cred-in">
-    <p>We're not a software company. <b>We're a production company</b> — this is the platform we built
-      to run our own studio, now yours.</p>
+    <p>We're not a software company. <b>We're a production company</b> — this is the system we built
+      to run our own studio, in ten weeks, because nothing on the market did the job.</p>
     <small>Forged on real productions for BBC, Netflix and National Geographic.</small>
   </div>
 </section>
@@ -331,20 +428,101 @@
   </div>
 </section>
 
+<!-- THREE LAYERS -->
+<section class="layers reveal" id="layers">
+  <div class="wrap">
+    <p class="eyebrow">How it fits together</p>
+    <h2 class="sec">Three layers, one project thread.</h2>
+    <p class="sub">Most tools solve one layer. The point of this one is the thread running through all
+      three — the same job, the same client, the same budget, from the first idea to the paid invoice.</p>
+
+    <div class="lstack">
+      <div class="layer">
+        <div class="layer-id">
+          <span class="n">Layer 01</span>
+          <span class="name">Studio</span>
+          <span class="kind">Creative</span>
+        </div>
+        <div class="layer-body">
+          <p>Idea to finished cut. Concept development, reference boards, script, storyboard, image and
+            video generation, voice, and a first assembly against your real rushes. A Director chat sits
+            over all of it and writes its answers straight into the work, not into a chat window.</p>
+          <div class="pills"><span class="pill">Concept</span><span class="pill">Reference</span><span class="pill">Script</span><span class="pill">Storyboard</span><span class="pill">Generate</span><span class="pill">Cast &amp; locations</span><span class="pill">Edit Assist</span><span class="pill">Director</span><span class="pill">Brand kits</span></div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-id">
+          <span class="n">Layer 02</span>
+          <span class="name">Production</span>
+          <span class="kind">Delivery</span>
+        </div>
+        <div class="layer-body">
+          <p>Running the job. Boards and schedules, crew and call sheets, a full timecoded review and
+            approval platform for clients, a white-labelled client portal, delivery manifests and
+            archive sign-off.</p>
+          <div class="pills"><span class="pill">Projects</span><span class="pill">Board</span><span class="pill">Schedule</span><span class="pill">Review</span><span class="pill">Client portal</span><span class="pill">Call sheets</span><span class="pill">Crew</span><span class="pill">Delivery</span></div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-id">
+          <span class="n">Layer 03</span>
+          <span class="name">Business</span>
+          <span class="kind">The company</span>
+        </div>
+        <div class="layer-body">
+          <p>Running the company. Pipeline and outreach, quotes priced off your own rate card, service
+            agreements with binding e-signature, accounting sync, receivables chasing, timesheets,
+            leave, payroll and contractor invoicing.</p>
+          <div class="pills"><span class="pill">Sales</span><span class="pill">Quotes</span><span class="pill">Agreements</span><span class="pill">E-signature</span><span class="pill">Receivables</span><span class="pill">HR &amp; payroll</span><span class="pill">Recruitment</span><span class="pill">Ask the Hub</span><span class="pill">Social</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thread">
+      <p><b>The one-line version.</b> Client review, production management, a generation stack and half
+        an accounting system in one install — sharing one definition of the brand and the cast, and
+        billing every AI job to the project and the person who ran it.</p>
+    </div>
+  </div>
+</section>
+
 <!-- FLAGSHIP FEATURES -->
 <section class="flag" id="flagship">
   <div class="wrap">
     <p class="eyebrow reveal">What makes it different</p>
-    <h2 class="sec reveal">Five things no stack of point tools can do.</h2>
+    <h2 class="sec reveal">Six things no stack of point tools can do.</h2>
 
     <div class="frow reveal">
       <div class="fcopy">
+        <span class="eyebrow">Cast &amp; locations</span>
+        <h3>The same character, in every shot, for the life of the project.</h3>
+        <p>Define a character, a location or a prop once — a locked description plus reference images
+          generated on a single seed. Name them in a frame and the sheet attaches itself automatically,
+          to every take, in every module. Looks hang off a character: same face, different wardrobe.</p>
+        <p class="vs">Everyone else asks you to paste a description and hope. <b>This is continuity you can deliver on.</b></p>
+      </div>
+      <div class="fviz frame">
+        <div class="tbar"><i></i><i></i><i></i><span>cast · Maya — lead</span></div>
+        <div class="body">
+          <div class="anchor-head">
+            <span class="av"></span>
+            <span><span class="nm">Maya</span><br><span class="rl">Lead · 4 looks · 38 frames</span></span>
+          </div>
+          <div class="lock"><b>Locked description</b> — mid-30s, close-cropped dark hair, charcoal
+            workwear jacket, warm olive skin, small scar above left brow…</div>
+          <div class="strip"><i></i><i></i><i></i><i></i></div>
+          <div class="attached">✓ Attached automatically to 38 storyboard frames</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="frow flip reveal">
+      <div class="fcopy">
         <span class="eyebrow">Ask the Hub</span>
         <h3>Ask your studio anything — and get a straight answer.</h3>
-        <p>Point tools each answer for their own slice. Production Hub's assistant reads across the
-          whole business — the lead, the quote, the board, the hours, the review status and the invoice
-          for the same job — so it can tell you what's actually blocking a delivery, or what you quoted
-          a client last year versus what it cost you.</p>
+        <p>Point tools each answer for their own slice. The hub's assistant reads across the whole
+          business — the lead, the quote, the board, the hours, the review status and the invoice for
+          the same job — through nineteen read-only tools, each gated by role and logged on every call.</p>
         <p class="vs">Grounded in your live data · permission-aware · <b>read-only</b></p>
       </div>
       <div class="fviz frame">
@@ -360,12 +538,13 @@
       </div>
     </div>
 
-    <div class="frow flip reveal">
+    <div class="frow reveal">
       <div class="fcopy">
         <span class="eyebrow">Client review, built in</span>
         <h3>Timecoded review &amp; approval — next to the board, not in another tab.</h3>
-        <p>Editors upload cuts, clients get a branded no-login link, feedback lands as timecoded
-          threads, and approval flips the card on the same board the team already works from.</p>
+        <p>Editors upload cuts, clients get a branded no-login link, and notes land as timecoded
+          threads — pinned to a moment or covering a stretch, with drawing on the frame, version
+          stacking and side-by-side comparison. Approval flips the card on the board the team works from.</p>
         <p class="vs">Replaces Frame.io · <b>saves ~$250/mo</b></p>
       </div>
       <div class="fviz frame">
@@ -379,13 +558,34 @@
       </div>
     </div>
 
+    <div class="frow flip reveal">
+      <div class="fcopy">
+        <span class="eyebrow">The cost ledger</span>
+        <h3>Every AI job billed to the project, and the person who ran it.</h3>
+        <p>Forty model entries across image, video, voice, music, transcription and enhancement, all
+          behind one key. Every generation is written to the project with the real provider cost — so at
+          month end you can say what AI cost on that job, and who spent it.</p>
+        <p class="vs">Replaces Midjourney + Runway + ElevenLabs + Boords · <b>saves ~$365/mo</b></p>
+      </div>
+      <div class="fviz frame">
+        <div class="tbar"><i></i><i></i><i></i><span>ai spend · Project: Hyatt brand film</span></div>
+        <div class="body">
+          <div class="led-row"><span><span class="w">Storyboard · 24 frames</span><br><span class="m">Sam · image</span></span><span class="c">$6.40</span></div>
+          <div class="led-row"><span><span class="w">Rooftop pickup shot</span><br><span class="m">Jon · video</span></span><span class="c">$5.10</span></div>
+          <div class="led-row"><span><span class="w">Scratch voiceover</span><br><span class="m">Aisha · voice</span></span><span class="c">$2.70</span></div>
+          <div class="led-total"><span>AI spend this project</span><b>$14.20</b></div>
+        </div>
+      </div>
+    </div>
+
     <div class="frow reveal">
       <div class="fcopy">
         <span class="eyebrow">Edit Assist</span>
         <h3>Paper edit in. Premiere timeline out.</h3>
         <p>Upload the approved paper edit and point at the rushes — it transcribes every take, finds
           each scripted line, picks the best read and hands your editor a ready-to-open Premiere or
-          Resolve timeline. Footage never leaves your machine.</p>
+          Resolve timeline. The worker runs on the machine holding the footage: only the timeline
+          comes back.</p>
         <p class="vs">The assembly day, <b>done before lunch</b></p>
       </div>
       <div class="fviz frame">
@@ -403,39 +603,21 @@
 
     <div class="frow flip reveal">
       <div class="fcopy">
-        <span class="eyebrow">The AI studio, with a budget</span>
-        <h3>Image, video, voice &amp; sound — costed to the project.</h3>
-        <p>Generate boards, pickup shots, voiceover and sound effects in-app; clean up location VO to
-          studio quality; pull visual references from a brief. Every generation is tracked against the
-          project's budget, so AI spend is a line item — not a mystery.</p>
-        <p class="vs">Replaces Midjourney + Runway + ElevenLabs + Boords · <b>saves ~$365/mo</b></p>
-      </div>
-      <div class="fviz frame">
-        <div class="tbar"><i></i><i></i><i></i><span>ai studio · Project: Hyatt brand film</span></div>
-        <div class="body">
-          <div class="prompt"><b>✨</b> rooftop pool at dusk, guests laughing, warm bokeh…</div>
-          <div class="gen"><i></i><i></i><i></i></div>
-          <div class="spend"><span>AI spend this project</span><b>$14.20</b></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="frow reveal">
-      <div class="fcopy">
         <span class="eyebrow">Contracts &amp; e-signing</span>
-        <h3>Quote → contract → signature, without per-envelope fees.</h3>
-        <p>Generate the SOW from the quote, send a signing link, and collect legally-binding signatures
-          on tamper-evident, hash-verified documents. The signed deal links straight to the project it
-          becomes.</p>
+        <h3>Quote → agreement → signature, without per-envelope fees.</h3>
+        <p>The agreement prefills from the quote — deliverables, budget table, payment terms,
+          milestones, technical spec. Creating a signing link freezes the wording with a checksum and
+          locks editing. The client signs in the browser with no login, and the signed deal links
+          straight to the project it becomes.</p>
         <p class="vs">Replaces DocuSign + PandaDoc · <b>saves ~$155/mo</b></p>
       </div>
       <div class="fviz frame">
-        <div class="tbar"><i></i><i></i><i></i><span>e-sign · SOW_BrandFilm.pdf</span></div>
+        <div class="tbar"><i></i><i></i><i></i><span>e-sign · SOW_BrandFilm.docx</span></div>
         <div class="body">
           <div class="doc-line w85"></div><div class="doc-line"></div><div class="doc-line w60"></div><div class="doc-line w40"></div>
           <div class="sig">
-            <svg viewBox="0 0 110 34"><path d="M4 26 C14 6, 22 30, 32 16 S 50 4, 58 20 S 78 30, 90 12 L 106 18" /></svg>
-            <span class="badge-ok">✓ Signed · hash-verified</span>
+            <svg viewBox="0 0 110 34" aria-hidden="true"><path d="M4 26 C14 6, 22 30, 32 16 S 50 4, 58 20 S 78 30, 90 12 L 106 18" /></svg>
+            <span class="badge-ok">✓ Signed · checksum verified</span>
           </div>
         </div>
       </div>
@@ -443,30 +625,62 @@
   </div>
 </section>
 
-<!-- LIFECYCLE COMPACT -->
-<section class="life reveal">
+<!-- MODULE CALL SHEET -->
+<section class="inv reveal" id="modules">
   <div class="wrap">
-    <p class="eyebrow">And everything else — because we needed it too</p>
-    <h2 class="sec">The whole lifecycle. Seventeen modules.</h2>
-    <div class="track">
-      <div class="lgrid">
-        <div class="lcell"><span class="n">01 · Win</span><h3>Sales</h3>
-          <ul><li>Leads pipeline &amp; AI prospecting</li><li>Outreach in your voice</li><li>Pitch &amp; treatment decks on your brand</li></ul></div>
-        <div class="lcell"><span class="n">02 · Price</span><h3>Quotes</h3>
-          <ul><li>AI estimator on your rate card</li><li>Discounts, multi-currency</li><li>Syncs to your accounting</li></ul></div>
-        <div class="lcell"><span class="n">03 · Contract</span><h3>Docs &amp; e-sign</h3>
-          <ul><li>SOWs &amp; agreements generated</li><li>Built-in hashed e-signing</li><li>AI contract extraction</li></ul></div>
-        <div class="lcell"><span class="n">04 · Produce</span><h3>Production</h3>
-          <ul><li>Boards, cards &amp; @mentions</li><li>AI scheduling &amp; Gantt</li><li>Call sheets, crew &amp; freelancers</li></ul></div>
-        <div class="lcell"><span class="n">05 · Create</span><h3>Creative &amp; AI</h3>
-          <ul><li>Image, video, voice &amp; SFX</li><li>Voice cleanup, reference finder</li><li>Storyboards &amp; Edit Assist</li></ul></div>
-        <div class="lcell"><span class="n">06 · Review</span><h3>Review</h3>
-          <ul><li>Timecoded client review</li><li>No-login share links</li><li>Isolated client portal</li></ul></div>
-        <div class="lcell"><span class="n">07 · Deliver</span><h3>Delivery</h3>
-          <ul><li>Hard delivery gates</li><li>Export &amp; filename manifest</li><li>Archive QC against cloud storage</li></ul></div>
-        <div class="lcell"><span class="n">08 · Run</span><h3>The back office</h3>
-          <ul><li>Receivables &amp; PO guardrails</li><li>HR, time, leave &amp; payroll</li><li>AI recruitment &amp; backups</li></ul></div>
-      </div>
+    <p class="eyebrow">The full inventory</p>
+    <h2 class="sec">Twenty-six modules. One shared core.</h2>
+    <p class="sub">Not a roadmap — this is what runs today. Each one hands the next its output.</p>
+
+    <div class="sheet">
+      <div class="sheet-band"><b>Studio</b><span>Idea to finished cut</span></div>
+      <div class="mrow"><span class="slug">Concept</span><span class="d">Three to five distinct, production-aware directions from a brief, grounded in the brand kit. The team comments and shortlists; the selected one becomes context for everything downstream.</span></div>
+      <div class="mrow"><span class="slug">Reference</span><span class="d">Plans four to six search lanes from the brief, then searches image, film and video sources. Every candidate is scored by a model against that lane's criteria; stock sites are filtered out and near-duplicates removed before anything reaches the board.</span></div>
+      <div class="mrow"><span class="slug">Script</span><span class="d">A block editor that understands scene headings, action, voiceover and notes, with version history. Scene headings split the script for boarding; voiceover lines become frame audio automatically.</span></div>
+      <div class="mrow"><span class="slug">Storyboard</span><span class="d">Boards scene by scene from the script, from uploads or from the generation library. One board-wide style so a whole board reads as one hand, a per-frame studio for the shots that need it, and a Cut view that plays the board as a sequence with real durations.</span></div>
+      <div class="mrow"><span class="slug">Generate</span><span class="d">Image, video and voice behind one key — plus upscale, background removal, restoration, outpainting and generative reframe. Brand kit and cast anchors attach themselves when named in the prompt.</span></div>
+      <div class="mrow"><span class="slug">Cast &amp; locations</span><span class="d">The project's recurring characters, places, props and looks, each with a locked description and identity sheet generated on one seed. Includes a printable casting page per character.</span></div>
+      <div class="mrow"><span class="slug">Edit Assist</span><span class="d">A script, a brief and a folder of rushes become an editable Premiere or Resolve timeline per cut. The worker runs where the footage lives; the edit never leaves the building.</span></div>
+      <div class="mrow"><span class="slug">Director</span><span class="d">A creative chat that can see the project's concepts, script, storyboard and cast. Turn a note into a shot, break a scene into coverage, develop a look, check continuity — answers come back as cards that apply straight into the work.</span></div>
+      <div class="mrow"><span class="slug">Brand kits</span><span class="d">House kits and per-client brands covering palette, typography, tone of voice and visual direction — built by hand or extracted from a brand guidelines PDF or a live website. Generated frames are scored against the palette afterwards.</span></div>
+
+      <div class="sheet-band"><b>Production</b><span>Running the job</span></div>
+      <div class="mrow"><span class="slug">Projects</span><span class="d">Creating a project links the quote or signed agreement, seeds a board from a template, imports the estimate's line items as cards, and opens a chat space with the producer and editor. Admins see budget against clocked time and planned crew cost, with margin.</span></div>
+      <div class="mrow"><span class="slug">Board</span><span class="d">Kanban built for a production, not a sprint. Workflow status is separate from the column, so a card in Edit can independently be in review or approved. Comments with tagging, attachments and a linked review cut per card.</span></div>
+      <div class="mrow"><span class="slug">Schedule</span><span class="d">Calendar, Gantt and table over one set of dates, with public holidays for the shoot country. Paste a written schedule, upload a spreadsheet or drop a Drive link and it becomes all three views.</span></div>
+      <div class="mrow"><span class="slug">Review</span><span class="d">Timecoded notes, drawing on the frame, version stacking with side-by-side comparison, transcription with subtitle export, nested folders and live folder shares. Share links carry labels, expiry, revoke and a per-link download switch.</span></div>
+      <div class="mrow"><span class="slug">Client portal</span><span class="d">A reviewer with a link needs no account at all. A client with a login gets their productions, everything awaiting review and shared deliverables, scoped to them — with their logo and their brand colour.</span></div>
+      <div class="mrow"><span class="slug">Call sheets</span><span class="d">Crew pre-seeded from the project with per-person call times, nearest hospital, key contacts and weather fetched for the location and date. Out comes a letterheaded Word file.</span></div>
+      <div class="mrow"><span class="slug">Crew</span><span class="d">Freelancers by role and country with day rates, kit notes and ratings. Import a whole address book from a spreadsheet or vCard with a dry-run preview. Assignments feed both the call sheet and the profitability figure.</span></div>
+      <div class="mrow"><span class="slug">Delivery</span><span class="d">The export manifest for every video by aspect ratio and language, following your house naming convention. Archive checklist, cloud quality check, per-asset sign-off, and a music cue sheet exported as a spreadsheet.</span></div>
+
+      <div class="sheet-band"><b>Business</b><span>Running the company</span></div>
+      <div class="mrow"><span class="slug">Sales</span><span class="d">Six-stage pipeline as a board or a list, multiple contacts per lead, activity log and follow-up tasks. AI prospecting generates real organisations with a pitch angle and refuses to invent contact names.</span></div>
+      <div class="mrow"><span class="slug">Quotes</span><span class="d">Describe the project and get categorised line items from your own rate card, priced by the client's tier and currency, with assumptions. Every line stays editable; push to your accounting system as a draft.</span></div>
+      <div class="mrow"><span class="slug">Agreements</span><span class="d">Service agreements prefilled from the quote — deliverables, budget table with discounts applied, client legal name, payment terms, milestones and signatories — exported as an editable Word document on your letterhead.</span></div>
+      <div class="mrow"><span class="slug">E-signature</span><span class="d">Signing links freeze the document with a checksum, expire after thirty days, bind to one email address and cannot be double-signed. The export is rebuilt from the version that was actually signed.</span></div>
+      <div class="mrow"><span class="slug">Receivables</span><span class="d">Live open invoices with aged buckets and the most overdue first, auto-matched to projects by reference. Two billing gates: don't invoice yet because the PO is missing, and this project started without any billing paperwork.</span></div>
+      <div class="mrow"><span class="slug">HR &amp; payroll</span><span class="d">Clock in against a company and a project, split hours on clock-out. Leave counts working days only, accrues automatically and pro-rates in the joining year. Overtime rules, payroll export, contractor invoices and appraisals that schedule themselves.</span></div>
+      <div class="mrow"><span class="slug">Recruitment</span><span class="d">Bulk CV screening — up to forty at a time — scored against the role's own rubric, with contact details extracted exactly as written or left blank. Applicants move through stages with interview scorecards.</span></div>
+      <div class="mrow"><span class="slug">Ask the Hub</span><span class="d">A command-bar assistant with nineteen read-only tools across projects, delivery gates, schedules, workload, crew availability, client history, quotes, pipeline, receivables and profitability. Every tool gated by role, every call logged.</span></div>
+      <div class="mrow"><span class="slug">Social</span><span class="d">Once a project is marked promotable and the client's permission is recorded, captions draft for four platforms using only public-safe facts. Nothing publishes automatically.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARDRAILS -->
+<section class="guard reveal">
+  <div class="wrap">
+    <p class="eyebrow">Why it's safe on client work</p>
+    <h2 class="sec">AI that fails closed, rather than making something up.</h2>
+    <p class="sub">Every AI feature previews first and saves only on a human's word. When it can't
+      verify something, it refuses — which is unglamorous, and the whole reason you can put this in
+      front of a client.</p>
+    <div class="ggrid">
+      <div class="gcard"><h3>Preview, then save</h3><p>Nothing an AI produces is written to your project until a person looks at it and says yes. Every generation, every draft, every import.</p></div>
+      <div class="gcard"><h3>Sourced or rejected</h3><p>Research results are thrown out wholesale if any candidate lacks a real, checkable source. A found email address is discarded unless the name literally appears in the page.</p></div>
+      <div class="gcard"><h3>Citations that are checked</h3><p>The assistant's links are filtered against what its tools actually returned, so it can't cite a project, invoice or document that doesn't exist.</p></div>
+      <div class="gcard"><h3>Your numbers, not invented ones</h3><p>Quotes price off your rate card. Estimates use your line items. Screening uses your rubric. The model does the drafting; your data does the deciding.</p></div>
     </div>
   </div>
 </section>
@@ -513,7 +727,7 @@
       <text class="lab" x="175" y="96"  text-anchor="end">Run</text>
     </svg>
     <p class="netcap">A lead becomes a quote becomes a project becomes an invoice — the same client,
-      budget, schedule and assets flow through every module. Nothing re-entered, nothing out of sync.</p>
+      budget, schedule, cast and assets flow through every module. Nothing re-entered, nothing out of sync.</p>
   </div>
 </section>
 
@@ -538,7 +752,7 @@
 </section>
 
 <!-- SECURITY / TRUST -->
-<section class="trust reveal">
+<section class="trust reveal" id="trust">
   <div class="wrap">
     <p class="eyebrow">Built to be trusted</p>
     <h2 class="sec">Your studio's data, handled properly.</h2>
@@ -546,9 +760,9 @@
     <div class="tgrid">
       <div class="tcard"><h3>Role-based access</h3><p>Editors see their work — not the P&amp;L. Budgets, margins and salaries stay with the people who should see them.</p></div>
       <div class="tcard"><h3>Permission-aware AI</h3><p>The assistant can only ever surface what you're already allowed to see — and it's read-only, so it can't change a thing.</p></div>
-      <div class="tcard"><h3>Tamper-evident contracts</h3><p>Every signature is hash-verified against a frozen document, with a full, append-only audit trail.</p></div>
+      <div class="tcard"><h3>Tamper-evident contracts</h3><p>Every signature is checksum-verified against a frozen document, with a full, append-only audit trail.</p></div>
       <div class="tcard"><h3>Encrypted backups</h3><p>Your whole hub is backed up automatically every night — encrypted and off-site.</p></div>
-      <div class="tcard"><h3>Your data stays yours</h3><p>Isolated per studio. We never train AI models on your projects, clients or numbers.</p></div>
+      <div class="tcard"><h3>Your own instance</h3><p>One deployment per studio, isolated from everyone else's. We never train AI models on your projects, clients or numbers.</p></div>
       <div class="tcard"><h3>Clients stay contained</h3><p>Review links and client portals are scoped to a single client — with no path into your workspace.</p></div>
     </div>
   </div>
@@ -558,8 +772,8 @@
 <div class="wrap">
   <section class="access reveal" id="access">
     <h2>We're onboarding a first cohort of studios.</h2>
-    <p>Production Hub is rolling out to a small group of production companies and creative agencies.
-      Early studios get white-glove setup, founder pricing locked in, and a real say in what we build next.</p>
+    <p>Production Hub is rolling out to a small group of production companies and creative agencies —
+      your own instance, set up with your brand, your rate card and your delivery conventions.</p>
     <ul>
       <li>White-glove onboarding</li>
       <li>Founder pricing, locked</li>
@@ -577,6 +791,17 @@
 
 <script>
   (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("theme");
+    if (btn) {
+      btn.addEventListener("click", function () {
+        var light = root.classList.toggle("light");
+        try { localStorage.setItem("ph-theme", light ? "light" : "dark"); } catch (e) {}
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", light ? "#f3f4f7" : "#0c0d10");
+      });
+    }
+
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var els = document.querySelectorAll(".reveal");
     if (reduce || !("IntersectionObserver" in window)) {
