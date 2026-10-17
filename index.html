@@ -175,6 +175,18 @@
   .art .stage { position: relative; z-index: 1; }
   @media (max-width: 900px) { .row { grid-template-columns: 1fr; gap: 36px; } .row.flip .art { order: 0; } .rows { gap: 80px; } }
 
+  /* Real screens: the hub as it is, in a hairline frame lit from behind */
+  .shot { display: block; width: 100%; height: auto; }
+  .window .shot { border-top: 1px solid var(--line); }
+  .frame { position: relative; z-index: 1; border-radius: 12px; overflow: hidden; background: #111; box-shadow: 0 0 0 1px var(--line-2), 0 30px 80px rgba(61,150,255,0.14), 0 20px 50px rgba(0,0,0,0.45); }
+  .row.wide { grid-template-columns: 1fr; gap: 34px; }
+  .row.wide .copy { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-left: 0; border-left: 0; gap: 26px; }
+  .row.wide .copy h2 { grid-column: 1 / -1; }
+  @media (max-width: 900px) { .row.wide .copy { grid-template-columns: 1fr; } }
+  .walk { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+  .layers .acc { grid-template-columns: 1fr 1fr; column-gap: 48px; align-items: start; }
+  @media (max-width: 900px) { .layers .acc { grid-template-columns: 1fr; } }
+
   /* Mock pieces */
   .line { display: grid; grid-template-columns: 74px 1fr; gap: 10px; padding: 6px 8px; border-radius: 7px; }
   .line .tc { font-family: var(--mono); font-size: 11px; color: #8fb7ff; }
@@ -213,9 +225,9 @@
   @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
 
   /* Layers: an accordion beside a panel */
-  .layers { border-radius: 16px; padding: 34px; background: linear-gradient(180deg, #0f0f2a, #0a0a20); box-shadow: inset 0 0 0 1px var(--line-2); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; position: relative; overflow: hidden; }
+  .layers { border-radius: 16px; padding: 34px; background: linear-gradient(180deg, #0f0f2a, #0a0a20); box-shadow: inset 0 0 0 1px var(--line-2); display: block; position: relative; overflow: hidden; }
   .layers::after { content: ""; position: absolute; right: -120px; bottom: -160px; width: 520px; height: 420px; background: radial-gradient(closest-side, rgba(61,150,255,0.30), transparent); filter: blur(30px); pointer-events: none; }
-  .acc { display: grid; gap: 0; }
+  .acc { display: grid; gap: 0; position: relative; z-index: 1; }
   .acc details { border-bottom: 1px solid var(--line); padding: 18px 0; }
   .acc details:last-child { border-bottom: 0; }
   .acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -226,7 +238,7 @@
   .acc .body { display: grid; gap: 14px; padding-top: 12px; }
   .acc .mods { display: flex; flex-wrap: wrap; gap: 6px; }
   .acc .mods span { padding: 4px 10px; border-radius: 999px; font-size: 12px; color: var(--text); box-shadow: inset 0 0 0 1px var(--line-2); background: rgba(255,255,255,0.02); }
-  @media (max-width: 900px) { .layers { grid-template-columns: 1fr; padding: 22px; } }
+  @media (max-width: 900px) { .layers { padding: 22px; } }
 
   /* Bento */
   .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
@@ -353,45 +365,9 @@
     </div>
 
     <div class="wrap">
-      <div class="window rv" role="img" aria-label="The hub: a project board with the Producer agent proposing a change">
+      <div class="window rv">
         <div class="chrome"><span class="dots"><b></b><b></b><b></b></span><span class="url">app.productionhub.co</span></div>
-        <div class="app">
-          <div class="side">
-            <span class="h">Studio</span>
-            <a><i></i>Research</a><a><i></i>Concept</a><a><i></i>Script</a><a><i></i>Storyboard</a><a><i></i>Footage</a>
-            <span class="h">Production</span>
-            <a class="on"><i></i>Board</a><a><i></i>Schedule</a><a><i></i>Review</a><a><i></i>Call sheets</a>
-            <span class="h">Business</span>
-            <a><i></i>Quotes</a><a><i></i>Agreements</a><a><i></i>Invoices</a>
-          </div>
-          <div class="main">
-            <div class="title"><b>Northshore Ferries — brand film</b><span class="chip blue">Edit week</span><span class="chip warn">1 overdue</span></div>
-            <div class="cols">
-              <div class="col"><span>Shoot · 3</span>
-                <div class="card">Pier sunrise pickups<small>Due Thu · Dee</small></div>
-                <div class="card">Release forms, crew<span class="chipline"><span class="chip warn">overdue</span></span></div>
-              </div>
-              <div class="col"><span>Edit · 4</span>
-                <div class="card">Hero 60s, v3<span class="chipline"><span class="chip blue">in review</span><span class="chip">4 notes</span></span></div>
-                <div class="card">Cutdowns 15s × 3<small>Waiting on v3</small></div>
-                <div class="card">Subtitles, Malay<small>Client asked by email</small></div>
-              </div>
-              <div class="col"><span>Delivered · 2</span>
-                <div class="card">Teaser 30s<span class="chipline"><span class="chip good">approved</span></span></div>
-                <div class="card">Stills selects<span class="chipline"><span class="chip good">approved</span></span></div>
-              </div>
-            </div>
-          </div>
-          <div class="agent">
-            <div class="who"><i></i>Producer</div>
-            <div class="bubble me">What's holding up delivery?</div>
-            <span class="look">Read the review notes on Hero 60s</span>
-            <span class="look">Searched the client's emails for "subtitles"</span>
-            <div class="bubble">Two things. The client left 4 notes on v3, the logo timing at 0:12 is the only blocker. And the Malay subtitles they asked for by email have no card yet.</div>
-            <div class="propose"><b>Add a card: Malay subtitles for Hero 60s</b><small style="color:var(--muted)">Edit column · due Fri · Eve</small><span class="apply">Apply</span></div>
-            <div class="compose">Ask the Producer…</div>
-          </div>
-        </div>
+        <img class="shot" src="img/hero.webp" width="2200" height="1375" alt="The hub: Northshore Ferries' project board, with the Producer explaining what is holding up delivery and proposing two changes to apply" />
       </div>
     </div>
   </div>
@@ -413,7 +389,7 @@
     <div class="wrap">
       <div class="head center">
         <span class="tag rv" style="justify-self:center"><i></i>One project thread</span>
-        <h2 class="grad rv">From the brief to the paid invoice, without re-typing a thing</h2>
+        <h2 class="grad rv">From the brief to the final cut, without re-typing a thing</h2>
         <p class="lede rv">Each module hands the next its output. The concept becomes the script, the script becomes the board, the cut goes to the client, and the approval moves the card and raises the invoice.</p>
       </div>
       <div class="center rv">
@@ -422,58 +398,20 @@
           <button role="tab" aria-selected="false" aria-controls="p-script" id="t-script">Script</button>
           <button role="tab" aria-selected="false" aria-controls="p-shoot" id="t-shoot">Shoot</button>
           <button role="tab" aria-selected="false" aria-controls="p-cut" id="t-cut">Cut</button>
-          <button role="tab" aria-selected="false" aria-controls="p-bill" id="t-bill">Bill</button>
         </div>
       </div>
       <div class="walk">
         <div class="art rv">
-          <div class="stage" data-panel id="p-brief" role="tabpanel" aria-labelledby="t-brief">
-            <div class="bar"><b>Research</b> · Who rides the 6am ferry?</div>
-            <div class="bubble">Commuters are 71% of the first sailing; most have taken it for over five years.<span class="src mono" style="display:block;margin-top:6px;color:#8fb7ff;font-size:10.5px">[1] Port authority ridership report · read 2 days ago</span></div>
-            <div class="bubble" style="margin-top:8px">The crews start at 4:30 and many are second-generation.<span class="src mono" style="display:block;margin-top:6px;color:#8fb7ff;font-size:10.5px">[2] Local paper interview · [3] union newsletter</span></div>
-            <div class="propose" style="margin-top:12px"><b>Concept: "First light"</b><small style="color:var(--muted)">The harbour as it wakes, told by the people who never sleep. Built on findings 1–3.</small></div>
-          </div>
-          <div class="stage" data-panel id="p-script" role="tabpanel" aria-labelledby="t-script" hidden>
-            <div class="bar"><b>Script</b> · Brand film · 60s · YouTube <span class="chip blue" style="margin-left:auto">Runtime 0:58 of 1:00</span></div>
-            <div class="script">
-              <div class="hd">Audio</div><div class="hd">Visual</div>
-              <div>“My father taught me to read the tide before school.”<br><span class="src">A001 · 01:00:05:00 · Mara</span></div><div>Mara coils a rope on the pier at dawn. Mist on the water.</div>
-              <div>Engine starts. Gulls.</div><div>Wide: the first ferry leaves, lights still on.</div>
-            </div>
-            <div class="beats"><i class="on" style="flex:2"></i><i class="on" style="flex:3"></i><i style="flex:4"></i><i style="flex:2"></i></div>
-            <small style="color:var(--muted)">Hook · Setup · Turn · Payoff, each sized to the format</small>
-          </div>
-          <div class="stage" data-panel id="p-shoot" role="tabpanel" aria-labelledby="t-shoot" hidden>
-            <div class="bar"><b>Call sheet</b> · Day 1 · North Pier · call 04:45</div>
-            <div class="ledger">
-              <div><span>Sunrise</span><span>06:41</span></div>
-              <div><span>Weather</span><span>24°C · light wind</span></div>
-              <div><span>Nearest hospital</span><span>2.1 km</span></div>
-              <div><span>Crew</span><span>7 · called 04:45–06:00</span></div>
-            </div>
-            <div class="propose" style="margin-top:12px"><b>Footage: 412 clips found on the cards</b><small style="color:var(--muted)">Proxies and transcripts made in the cloud, filed into bins by day and camera</small></div>
-          </div>
-          <div class="stage" data-panel id="p-cut" role="tabpanel" aria-labelledby="t-cut" hidden>
-            <div class="bar"><b>Review</b> · Hero 60s · v3 <span class="chip" style="margin-left:auto">v2 notes beside it</span></div>
-            <div class="player"><span class="frame"></span><div class="scrub"><i></i></div><span class="pin" style="left:20%"></span><span class="pin" style="left:62%"></span></div>
-            <div class="note"><span class="tc">0:12</span><div>Logo lands too early, push it a beat.<small>Cara · client · drew on the frame</small></div></div>
-          </div>
-          <div class="stage" data-panel id="p-bill" role="tabpanel" aria-labelledby="t-bill" hidden>
-            <div class="bar"><b>Billing</b> · Northshore Ferries</div>
-            <div class="ledger">
-              <div><span>Deposit 50% · invoiced</span><span>paid</span></div>
-              <div><span>On approval 50%</span><span>raised today</span></div>
-              <div><span>AI spend on this job</span><span>US$42.80</span></div>
-              <div class="sum"><span>Margin against clocked time</span><span>38%</span></div>
-            </div>
-          </div>
+          <div class="frame" data-panel id="p-brief" role="tabpanel" aria-labelledby="t-brief"><img class="shot" src="img/research.webp" width="1856" height="1000" alt="A research brief: what was found about the first sailing, sorted into context, angles, characters, tension and facts, each finding citing its sources" loading="lazy" /></div>
+          <div class="frame" data-panel id="p-script" role="tabpanel" aria-labelledby="t-script" hidden><img class="shot" src="img/script.webp" width="1490" height="980" alt="An audio-visual script for the brand film, scene by scene, with sync lines from the interviews" loading="lazy" /></div>
+          <div class="frame" data-panel id="p-shoot" role="tabpanel" aria-labelledby="t-shoot" hidden><img class="shot" src="img/footage.webp" width="2000" height="1000" alt="The shoot's transcripts filed into bins by day and kind, with their selects" loading="lazy" /></div>
+          <div class="frame" data-panel id="p-cut" role="tabpanel" aria-labelledby="t-cut" hidden><img class="shot" src="img/review.webp" width="2200" height="1176" alt="Client review of the hero film: the cut beside the client's timecoded notes" loading="lazy" /></div>
         </div>
         <div class="copy">
           <div data-copy="p-brief"><h3>Brief</h3><p style="margin-top:12px">Research reads the web and cites every claim to a page it actually read. Concepts are drafted from the brief, the brand kit and those findings, and the one you pick becomes context for everything after it.</p></div>
           <div data-copy="p-script" hidden><h3>Script</h3><p style="margin-top:12px">An audio-visual script that knows its format: a 15-second Reel and a 60-second film get different beats, and the runtime is counted as you write. Lines from the interviews drop in with their clip and timecode.</p></div>
-          <div data-copy="p-shoot" hidden><h3>Shoot</h3><p style="margin-top:12px">Call sheets with crew, call times, weather and the nearest hospital. After the shoot, point the hub at the cards or the drive and it makes proxies and transcripts in the cloud, so every take can be searched and played from anywhere.</p></div>
+          <div data-copy="p-shoot" hidden><h3>Shoot</h3><p style="margin-top:12px">Crew and call sheets for the day. After the shoot, point the hub at the cards or the drive and it makes proxies and transcripts in the cloud, so every take can be searched and played from anywhere.</p></div>
           <div data-copy="p-cut" hidden><h3>Cut</h3><p style="margin-top:12px">Clients review on a branded link with no login, leave timecoded notes and draw on the frame. Compare two cuts with the last round's notes beside the new one, and approval moves the card on the board.</p></div>
-          <div data-copy="p-bill" hidden><h3>Bill</h3><p style="margin-top:12px">Quotes priced off your own rate card become the agreement, the agreement is signed in the browser, and billing stages raise their invoices in Xero or QuickBooks when they fall due.</p></div>
         </div>
       </div>
     </div>
@@ -489,15 +427,7 @@
 
       <div class="rows">
         <div class="row" id="agents">
-          <div class="art rv">
-            <div class="stage">
-              <div class="bar"><b>Director</b> · Northshore Ferries</div>
-              <div class="bubble me" style="margin-left:auto;width:fit-content">Where does Mara talk about leaving the island?</div>
-              <span class="look" style="margin:10px 0 6px">Searched every transcript by meaning</span>
-              <div class="bubble">At 01:14:22 in her second interview: “Everyone my age left. I stayed because the boats needed someone.” It would land after the wide of the empty pier, frame 7.</div>
-              <div class="propose" style="margin-top:10px"><b>Frame 7: add the line as sync, hold the wide 2s longer</b><span class="apply">Apply</span></div>
-            </div>
-          </div>
+          <div class="art rv"><div class="frame"><img class="shot" src="img/director.webp" width="1568" height="1148" alt="The Director finding the line in an interview transcript and proposing it as a new scene for the script" loading="lazy" /></div></div>
           <div class="copy rv">
             <h2 class="grad" style="font-size:clamp(28px,3.4vw,36px)">A Director and a Producer on every project</h2>
             <div class="point"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><b>They know the whole project</b><p>The board, every review note, the transcripts, the uploaded brief, the budget and the team chat. They look up the detail when they need it, instead of guessing.</p></div>
@@ -506,21 +436,8 @@
           </div>
         </div>
 
-        <div class="row flip" id="footage">
-          <div class="art rv">
-            <div class="stage">
-              <div class="bar"><b>Transcripts</b> · 412 files · 9h 20m of speech</div>
-              <div class="split2">
-                <div><div class="bin">Day 1 › Interviews <small>6</small></div><div class="bin">Day 1 › B-roll <small>214</small></div><div class="bin">Day 2 › Interviews <small>4</small></div><div class="bin">Not in a bin <small>2</small></div></div>
-                <div>
-                  <div class="line"><span class="tc">01:00:01:00</span><span><span class="sp">Mara</span>I have fished here for forty years.</span></div>
-                  <div class="line now"><span class="tc">01:00:05:00</span><span><span class="sp">Mara</span>My father taught me to <mark>read the tide</mark> before school.</span></div>
-                  <div class="line"><span class="tc">01:00:11:12</span><span><span class="sp">Interviewer</span>And the boats?</span></div>
-                  <div class="propose" style="margin-top:8px"><b>Saved as a select · Strong</b><small style="color:var(--muted)">Waits in the script's Selects panel</small></div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="row wide" id="footage">
+          <div class="art rv"><div class="frame"><img class="shot" src="img/transcripts.webp" width="2200" height="744" alt="An interview transcript, line by line with timecodes and speakers, two lines saved as selects, beside the footage" loading="lazy" /></div></div>
           <div class="copy rv">
             <h2 class="grad" style="font-size:clamp(28px,3.4vw,36px)">Every word of the rushes, searchable</h2>
             <div class="point"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 18a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 8.5a4.5 4.5 0 0 1 .5 9.5z"/></svg></span><b>Processed in the cloud</b><p>Proxies and transcripts are made in the cloud, with nothing to install. Duplicates are caught before they're processed, and the whole shoot is searchable from any browser.</p></div>
@@ -529,15 +446,8 @@
           </div>
         </div>
 
-        <div class="row" id="review">
-          <div class="art rv">
-            <div class="stage">
-              <div class="bar"><b>Review</b> · Hero 60s · v3 compared with v2</div>
-              <div class="player"><span class="frame"></span><div class="scrub"><i></i></div><span class="pin" style="left:20%"></span><span class="pin" style="left:48%"></span><span class="pin" style="left:77%"></span></div>
-              <div class="note"><span class="tc">0:12</span><div>Logo lands too early, push it a beat.<small>v2 · Cara · client · fixed in v3</small></div></div>
-              <div class="note"><span class="tc">0:31</span><div>Can the price card come off this shot?<small>v3 · Cara · client · text removed by AI</small></div></div>
-            </div>
-          </div>
+        <div class="row wide" id="review">
+          <div class="art rv"><div class="frame"><img class="shot" src="img/review.webp" width="2200" height="1176" alt="Client review: the hero film playing beside the client's timecoded notes" loading="lazy" /></div></div>
           <div class="copy rv">
             <h2 class="grad" style="font-size:clamp(28px,3.4vw,36px)">Client review, next to the work</h2>
             <div class="point"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>Timecoded, drawn on, compared</b><p>Notes pinned to a moment or a stretch, drawing on the frame, version stacks, and a compare view that keeps the last round's notes beside the new cut.</p></div>
@@ -581,16 +491,6 @@
           <details><summary><h3>Production: running the job</h3></summary><div class="body"><p>Projects, boards built for production, schedules in calendar, Gantt and table, crew bookings, call sheets edited like a spreadsheet, client review and approval, a white-labelled client portal, delivery manifests and archive sign-off.</p><div class="mods"><span>Projects</span><span>Board</span><span>Schedule</span><span>Crew</span><span>Call sheets</span><span>Review</span><span>Client portal</span><span>Delivery</span><span>Producer</span></div></div></details>
           <details><summary><h3>Business: running the company</h3></summary><div class="body"><p>A sales pipeline with prospecting, quotes, agreements with the company's own terms, e-signature with reminders, billing stages, receivables, timesheets, leave, overtime and payroll, recruitment, appraisals and social.</p><div class="mods"><span>Sales CRM</span><span>Quotes</span><span>Agreements</span><span>E-signature</span><span>Billing</span><span>Receivables</span><span>Time &amp; leave</span><span>Payroll</span><span>Recruitment</span><span>Appraisals</span><span>Social</span></div></div></details>
           <details><summary><h3>Across all three</h3></summary><div class="body"><p>Team chat with a space per project and threads, AI teammates you can message, Ask the Hub, a calendar feed, an audit log, and a phone app for all of it.</p><div class="mods"><span>Hub chat</span><span>AI teammates</span><span>Ask the Hub</span><span>Calendar feed</span><span>Audit log</span><span>Phone app</span></div></div></details>
-        </div>
-        <div class="art" style="align-self:center">
-          <div class="stage">
-            <div class="bar"><b>Storyboard</b> · Main board · 12 frames</div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-              <div class="player" style="aspect-ratio:16/10"></div><div class="player" style="aspect-ratio:16/10;background:radial-gradient(120% 90% at 70% 30%,#2b2a63,#0b0d24 60%)"></div><div class="player" style="aspect-ratio:16/10;background:radial-gradient(120% 90% at 40% 70%,#173a5e,#0b0d24 60%)"></div>
-              <div class="player" style="aspect-ratio:16/10;background:radial-gradient(120% 90% at 20% 30%,#33295e,#0b0d24 60%)"></div><div class="player" style="aspect-ratio:16/10"></div><div class="player" style="aspect-ratio:16/10;background:radial-gradient(120% 90% at 60% 60%,#1e3266,#0b0d24 60%)"></div>
-            </div>
-            <div class="note" style="grid-template-columns:auto 1fr"><span class="chip blue">Maya · lead</span><div>Attached automatically to 38 frames: same face, same jacket, every shot.</div></div>
-          </div>
         </div>
       </div>
     </div>
