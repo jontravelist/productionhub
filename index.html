@@ -233,7 +233,16 @@
   /* The flow: a job's stages left to right, each module a button whose line shows below */
   .flow { position: relative; z-index: 2; margin: 48px auto 0; width: min(1080px, 100%); text-align: left; }
   .stages { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; }
-  .fstage { position: relative; display: grid; gap: 8px; align-content: start; }
+  .fstage { position: relative; display: flex; flex-direction: column; gap: 8px; }
+  /* Every stage runs down into the project: a line from under its modules to the core. */
+  .fstage::after { content: ""; flex: 1; align-self: center; width: 1px; min-height: 22px; margin-bottom: -30px; background: linear-gradient(180deg, rgba(61,150,255,0.22), rgba(61,150,255,0.7)); transition: background .25s, box-shadow .25s; }
+  .fstage:has(.fmod[aria-expanded="true"])::after, .fstage:hover::after { background: linear-gradient(180deg, rgba(61,150,255,0.35), #3d96ff); box-shadow: 0 0 10px rgba(61,150,255,0.6); }
+  .fcore { position: relative; margin-top: 30px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 18px; border-radius: 14px;
+    background: linear-gradient(180deg, rgba(61,150,255,0.10), rgba(61,150,255,0.03)); box-shadow: inset 0 0 0 1px rgba(61,150,255,0.35), 0 0 40px rgba(61,150,255,0.10); }
+  .fcore b { font-size: 15px; font-weight: 600; color: var(--text); display: inline-flex; align-items: center; gap: 9px; }
+  .fcore b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #3d96ff; box-shadow: 0 0 12px #3d96ff; }
+  .fcore ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .fcore li { font-size: 12.5px; color: var(--body); padding: 3px 9px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); background: rgba(255,255,255,0.02); }
   .fstage h3 { display: flex; align-items: center; gap: 10px; font-size: 15px; white-space: nowrap; }
   /* A line runs from each stage's name to the next. */
   .fstage:not(:last-child) h3::after { content: ""; flex: 1; height: 1px; margin-right: -12px; background: linear-gradient(90deg, rgba(61,150,255,0.5), rgba(61,150,255,0.18)); }
@@ -258,6 +267,13 @@
     .fstage .fmod { width: auto; }
     .fstage:not(:last-child) h3::after { display: none; }
     .fstage .fdetail { margin-top: 4px; padding-top: 8px; min-height: 0; }
+    /* Stacked: a spine down the left joins every stage to the project below. */
+    .stages { border-left: 1px solid rgba(61,150,255,0.4); padding-left: 16px; margin-left: 5px; }
+    .fstage::after { display: none; }
+    .fstage h3::before { content: ""; position: absolute; left: -20.5px; margin-top: 1px; width: 8px; height: 8px; border-radius: 50%; background: #0b1230; box-shadow: inset 0 0 0 1px rgba(61,150,255,0.7); }
+    .fstage:has(.fmod[aria-expanded="true"]) h3::before { background: #3d96ff; box-shadow: 0 0 10px #3d96ff; }
+    .fcore { margin-top: 0; border-top-left-radius: 0; }
+    .fcore::before { content: ""; position: absolute; left: 5px; top: -12px; width: 1px; height: 12px; background: rgba(61,150,255,0.4); }
   }
   @media (prefers-reduced-motion: reduce) { .fmod { transition: none; } }
 
@@ -414,6 +430,7 @@
           <li class="fstage"><h3>Review</h3><div class="fmods"><button type="button" class="fmod pm" aria-controls="flow-detail" aria-expanded="false" data-group="Project Management" data-detail="A branded link with no login: timecoded notes, drawing on the frame, cuts side by side."><span>Client review</span><s>Frame.io</s></button><button type="button" class="fmod pm" aria-controls="flow-detail" aria-expanded="false" data-group="Project Management" data-detail="Each client's own projects, cuts and files, under your brand."><span>Client portal</span><s>Google Drive</s></button></div></li>
           <li class="fstage"><h3>Deliver &amp; bill</h3><div class="fmods"><button type="button" class="fmod pm" aria-controls="flow-detail" aria-expanded="false" data-group="Project Management" data-detail="A manifest of every deliverable, and sign-off before the archive."><span>Delivery</span><s>WeTransfer</s></button><button type="button" class="fmod bt" aria-controls="flow-detail" aria-expanded="false" data-group="Business Tools" data-detail="Raised from the billing stages, with what's owed chased."><span>Invoices</span></button><button type="button" class="fmod bt" aria-controls="flow-detail" aria-expanded="false" data-group="Business Tools" data-detail="Who owes what, and since when."><span>Receivables</span><s>Chaser</s></button></div></li>
         </ol>
+        <div class="fcore"><b>The project</b><ul><li>Brief</li><li>Script</li><li>Rushes</li><li>Client notes</li><li>Team</li><li>Budget</li><li>Invoices</li></ul></div>
         <div class="fdetail" id="flow-detail" aria-live="polite"><span class="grp"></span><b></b><p></p></div>
       </div>
     </div>
