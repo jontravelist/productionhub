@@ -779,27 +779,29 @@
       var detail = document.getElementById("flow-detail");
       var narrow = matchMedia("(max-width: 980px)"), hover = matchMedia("(hover: hover)");
       // Each module's screen: img/modules/<name>.webp, swapped between two images so it crossfades.
-      var pics = Array.prototype.slice.call(detail.querySelectorAll(".pics img")), front = 0, current = null, seen = false;
+      // The swap happens on whichever comes first: the load event, decode(), or a short timeout;
+      // Safari can skip the load event for an image it already has, which left the old screen up.
+      var pics = Array.prototype.slice.call(detail.querySelectorAll(".pics img")), front = 0, current = null;
       var slug = function (m) { return m.querySelector("span").textContent.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); };
       var showShot = function (m) {
         var src = "img/modules/" + slug(m) + ".webp", name = m.querySelector("span").textContent;
         if (pics[front].getAttribute("src") === src) return;
-        var back = pics[1 - front];
-        back.onload = function () { if (current !== m) return; back.classList.add("on"); pics[front].classList.remove("on"); front = 1 - front; };
+        var back = pics[1 - front], done = false;
+        var swap = function () { if (done || current !== m) return; done = true; back.classList.add("on"); pics[front].classList.remove("on"); front = 1 - front; };
         back.className = slug(m) === "premiere-panel" ? "tall" : "";
         back.alt = name + " in ProductionHUB: " + m.getAttribute("data-detail");
+        if (back.getAttribute("src") === src && back.complete) { swap(); return; }
+        back.onload = swap;
         back.src = src;
+        if (back.decode) back.decode().then(swap, function () {});
+        setTimeout(swap, 1200);
       };
-      if ("IntersectionObserver" in window) {
-        var seenIo = new IntersectionObserver(function (entries) { if (entries.some(function (e) { return e.isIntersecting; })) { seen = true; seenIo.disconnect(); if (current) showShot(current); } }, { rootMargin: "200px 0px" });
-        seenIo.observe(flow);
-      } else seen = true;
       var pick = function (m) {
         mods.forEach(function (x) { x.setAttribute("aria-expanded", x === m ? "true" : "false"); });
         detail.querySelector(".grp").textContent = m.getAttribute("data-group");
         detail.querySelector("b").textContent = m.querySelector("span").textContent;
         detail.querySelector("p").textContent = m.getAttribute("data-detail");
-        current = m; if (seen) showShot(m);
+        current = m; showShot(m);
         if (narrow.matches) m.closest(".fstage").appendChild(detail);
         else if (detail.parentElement !== flow) flow.appendChild(detail);
       };
