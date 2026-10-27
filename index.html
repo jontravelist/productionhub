@@ -25,7 +25,6 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="preload" as="image" href="img/hero.webp" fetchpriority="high" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "ProductionHUB", "url": "https://productionhub.co/", "logo": "https://productionhub.co/apple-touch-icon.png", "email": "jon@creatorslab.co"}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ProductionHUB", "url": "https://productionhub.co/", "applicationCategory": "BusinessApplication", "applicationSubCategory": "Video production management software", "operatingSystem": "Web, iOS, Android", "description": "Video production management software: client review and approval, scheduling and call sheets, scripts and storyboards, footage transcripts, quotes, contracts, invoices, time and payroll, with AI assistants for producers and directors.", "featureList": ["Timecoded client review and approval", "Scheduling, crew and call sheets", "Scripts and storyboards", "Footage proxies and transcripts", "Quotes, agreements and e-signature", "Invoices and billing stages", "Time, leave and payroll", "AI assistants for producers and directors", "Client portal", "Phone app"], "image": "https://productionhub.co/og.png"}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ProductionHUB?", "acceptedAnswer": {"@type": "Answer", "text": "Software for running a video production company. Client review and approval, scheduling, crew and call sheets, scripts and storyboards, footage transcripts, quotes, contracts, invoices, time and payroll share one platform, so every job keeps its brief, rushes, client notes and budget together. It was built inside a working production company to run its own projects."}}, {"@type": "Question", "name": "Who is it for?", "acceptedAnswer": {"@type": "Answer", "text": "Video production companies, creative and content agencies, and in-house video teams who are tired of keeping a dozen subscriptions in sync. Freelancers can be given access to just the projects they work on."}}, {"@type": "Question", "name": "Can it replace Frame.io, StudioBinder or Monday?", "acceptedAnswer": {"@type": "Answer", "text": "It covers what most studios use them for: timecoded client review and approval like Frame.io, schedules, crew and call sheets like StudioBinder, and production boards like Monday, plus quotes, e-signature, invoicing, time and payroll. You can also start with one part and switch off the modules you don't need."}}, {"@type": "Question", "name": "Do I have to upload all my footage?", "acceptedAnswer": {"@type": "Answer", "text": "No. The hub makes proxies and transcripts of your rushes in the cloud so every take can be searched and played from a browser, while the original files stay on Google Drive, Dropbox or your own storage. Cuts you send for client review are uploaded to the hub."}}, {"@type": "Question", "name": "Do clients need an account to review?", "acceptedAnswer": {"@type": "Answer", "text": "No. Clients review on a branded link with no login, leave timecoded notes and approve from there. Clients who want one can have a portal login that shows only their own productions, with your logo."}}, {"@type": "Question", "name": "How does the AI handle client work?", "acceptedAnswer": {"@type": "Answer", "text": "As a tool, not the one driving. The AI finds, drafts and suggests, and nothing is saved, sent or changed until someone on your team approves it. It uses only providers that don't store or train on your prompts, and every AI job is costed to the project and the person who ran it."}}, {"@type": "Question", "name": "How much does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "ProductionHUB is priced per seat per month. AI is charged at what the providers charge, from prepaid credit, and every cost shows against its project; or connect your own AI accounts and pay them directly. Studios in the first cohort get founder pricing that stays locked. Request early access and we'll send a quote for your team size."}}, {"@type": "Question", "name": "Can I bring in what we already have?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Crew lists import from spreadsheets or contacts, schedules from a spreadsheet or a written schedule, and scripts and decks from Word, PDF and PowerPoint files."}}]}</script>
@@ -104,9 +103,6 @@
   .announce { text-decoration: none; }
   .announce:hover { border-color: rgba(200,205,255,0.4); }
 
-  /* App window */
-  .window { position: relative; z-index: 2; margin: 64px auto 0; width: min(1080px, 100%); border-radius: 14px; background: linear-gradient(180deg, #12122e, #0b0b22);
-    box-shadow: 0 0 0 1px var(--line-2), 0 -20px 80px rgba(61,150,255,0.20), 0 40px 80px rgba(0,0,0,0.5); overflow: hidden; }
   .chrome { display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 14px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
   .dots { display: flex; gap: 6px; } .dots b { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; } .dots b:nth-child(2) { background: #febc2e; } .dots b:nth-child(3) { background: #28c840; }
   .url { margin: 0 auto; padding: 4px 40px; border-radius: 6px; background: rgba(255,255,255,0.04); box-shadow: inset 0 0 0 1px var(--line); font-size: 11.5px; }
@@ -194,7 +190,6 @@
 
   /* Real screens: the hub as it is, in a hairline frame lit from behind */
   .shot { display: block; width: 100%; height: auto; }
-  .window .shot { border-top: 1px solid var(--line); }
   .frame { position: relative; z-index: 1; border-radius: 12px; overflow: hidden; background: #111; box-shadow: 0 0 0 1px var(--line-2), 0 30px 80px rgba(61,150,255,0.14), 0 20px 50px rgba(0,0,0,0.45); }
   .row.wide { grid-template-columns: 1fr; gap: 34px; }
   .row.wide .copy { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-left: 0; border-left: 0; gap: 26px; }
@@ -373,8 +368,6 @@
   /* Reveal on scroll (only when scripting runs, and never for reduced motion) */
   .js .rv { opacity: 0; transform: translateY(26px) scale(.985); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
   .js .rv.in { opacity: 1; transform: none; }
-  /* The hero's screen starts tipped back and settles flat as the page moves (set from the script). */
-  .js .window.tilt { transform-origin: 50% 0; transition: opacity .9s ease; will-change: transform; }
   /* The flow draws itself: each stage's line runs out to the next, then down into the project. */
   .js .flow .fstage h3::after { transform: scaleX(0); transform-origin: left; transition: transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: calc(.15s + var(--i, 0) * .09s); }
   .js .flow .fstage::after { transform: scaleY(0); transform-origin: top; transition: transform .6s cubic-bezier(.2,.7,.2,1), background .25s, box-shadow .25s; transition-delay: calc(.55s + var(--i, 0) * .07s), 0s, 0s; }
@@ -409,7 +402,7 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="ProductionHUB home">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="25" fill="none" stroke="#3d96ff" stroke-width="8"/><circle cx="32" cy="32" r="9" fill="#cfd7ff"/></svg>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="25" fill="none" stroke="#3d96ff" stroke-width="8"/><path d="M27.5 23.6 40.6 32 27.5 40.4Z" fill="#cfd7ff" stroke="#cfd7ff" stroke-width="3" stroke-linejoin="round"/></svg>
       ProductionHUB
     </a>
     <nav class="links" aria-label="Sections">
@@ -453,13 +446,6 @@
         <div class="fdetail" id="flow-detail"><div class="fwords" aria-live="polite"><span class="grp"></span><b></b><p></p></div>
           <div class="fshot"><div class="chrome"><span class="dots"><b></b><b></b><b></b></span><span class="url">app.productionhub.co</span></div><div class="pics"><img alt="" decoding="async"><img alt="" decoding="async"></div></div>
         </div>
-      </div>
-    </div>
-
-    <div class="wrap">
-      <div class="window rv">
-        <div class="chrome"><span class="dots"><b></b><b></b><b></b></span><span class="url">app.productionhub.co</span></div>
-        <img class="shot" fetchpriority="high" src="img/hero.webp" width="2200" height="1375" alt="The hub: Northshore Ferries' project board, with the Producer explaining what is holding up delivery and proposing two changes to apply" />
       </div>
     </div>
   </div>
@@ -723,7 +709,7 @@
 
 <footer>
   <div class="wrap">
-    <a class="brand" href="#top"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="25" fill="none" stroke="#3d96ff" stroke-width="8"/><circle cx="32" cy="32" r="9" fill="#cfd7ff"/></svg>ProductionHUB</a>
+    <a class="brand" href="#top"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="25" fill="none" stroke="#3d96ff" stroke-width="8"/><path d="M27.5 23.6 40.6 32 27.5 40.4Z" fill="#cfd7ff" stroke="#cfd7ff" stroke-width="3" stroke-linejoin="round"/></svg>ProductionHUB</a>
     <nav aria-label="Footer"><a href="#agents">Agents</a><a href="#footage">Footage</a><a href="#review">Review</a><a href="#modules">Modules</a><a href="#trust">Trust</a><a href="#faq">FAQ</a><a href="mailto:jon@creatorslab.co">jon@creatorslab.co</a></nav>
     <span>© 2026 ProductionHUB</span>
   </div>
@@ -746,22 +732,6 @@
     Array.prototype.forEach.call(document.querySelectorAll(".bento, .rows, .layers"), function (grid) {
       Array.prototype.forEach.call(grid.querySelectorAll(".rv"), function (el, i) { el.style.setProperty("--d", (Math.min(i, 8) * 0.07) + "s"); });
     });
-
-    // The hero's screen: tipped back at the top of the page, flat by the time it's in the middle of the view.
-    var hero = document.querySelector(".hero .window");
-    if (hero && !still) {
-      hero.classList.add("tilt");
-      var ticking = false;
-      var tilt = function () {
-        ticking = false;
-        var r = hero.getBoundingClientRect(), vh = window.innerHeight;
-        var t = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.7)));
-        var e = t * t * (3 - 2 * t);
-        hero.style.transform = "perspective(1600px) rotateX(" + (18 * (1 - e)).toFixed(2) + "deg) scale(" + (0.92 + 0.08 * e).toFixed(4) + ")";
-      };
-      window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(tilt); } }, { passive: true });
-      window.addEventListener("resize", tilt); tilt();
-    }
 
     // Sections rise into place as they arrive.
     var items = document.querySelectorAll(".rv");
