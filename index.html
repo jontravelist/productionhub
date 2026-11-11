@@ -449,7 +449,7 @@ footer nav a:hover { color: #fff; }
   </style>
 </head>
 <body>
-<script>document.documentElement.classList.add("js")</script>
+<script>document.documentElement.classList.add("js");window.__errs=[];addEventListener("error",function(e){__errs.push((e.message||"error")+" @"+(e.lineno||0))})</script>
 
 <header class="nav" id="nav">
   <div class="wrap">
@@ -1047,8 +1047,9 @@ footer nav a:hover { color: #fff; }
       return { x: cx - (r.left + r.width / 2), y: cy - (r.top + scrollY + r.height / 2), rot: parseFloat(t.getAttribute("data-rot") || 0) };
     });
   };
+  var frames = 0;
   var frame = function () {
-    ticking = false;
+    ticking = false; frames++;
     var y = scrollY, vh = innerHeight;
     nav.classList.toggle("scrolled", y > 8);
     if (tc) {
@@ -1142,6 +1143,28 @@ footer nav a:hover { color: #fff; }
         canvas.classList.add("on");
       }
     }
+  }
+  // productionhub.co/?debug shows what the page thinks is going on, for when something looks wrong on one machine.
+  if (/[?&]debug\b/.test(location.search)) {
+    var box = document.createElement("pre");
+    box.style.cssText = "position:fixed;left:12px;bottom:12px;z-index:999;margin:0;padding:12px 14px;max-width:min(560px,92vw);white-space:pre-wrap;font:12px/1.5 ui-monospace,Menlo,monospace;color:#d8ffe6;background:rgba(0,0,0,.88);border:1px solid #2c6;border-radius:10px";
+    document.body.appendChild(box);
+    var cs = function (s, prop) { var e = $(s); return e ? getComputedStyle(e)[prop] : "(none)"; };
+    setInterval(function () {
+      var c = $(".sky canvas");
+      box.textContent = [
+        "build: 2026-11-11 04:03 UTC",
+        "reduced motion: " + matchMedia("(prefers-reduced-motion: reduce)").matches,
+        "errors: " + ((window.__errs || []).join(" | ") || "none"),
+        "viewport: " + innerWidth + "x" + innerHeight + " @" + devicePixelRatio + "  wide: " + wide.matches,
+        "scroll: " + Math.round(scrollY) + "  frames drawn: " + frames,
+        "sky: " + (c && c.classList.contains("on") ? "webgl on" : "css fallback"),
+        "screen tilt --p: " + (device ? device.style.getPropertyValue("--p") : "(none)"),
+        "tab bob: " + cs(".ftab > span", "animationName") + "  marquee: " + cs(".marquee .track", "animationName"),
+        "revealed: " + $$(".rv.in").length + "/" + $$(".rv").length + "  transition: " + cs(".rv", "transitionDuration"),
+        navigator.userAgent
+      ].join("\n");
+    }, 400);
   }
 })();
 </script>
